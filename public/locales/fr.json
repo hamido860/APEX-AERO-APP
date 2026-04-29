@@ -1,0 +1,468 @@
+{
+  "language": "Langue",
+  "english": "English",
+  "french": "Français",
+  "app": {
+    "saved": "Modifications enregistrées automatiquement.",
+    "saveError": "Impossible d'enregistrer les modifications."
+  },
+  "nav": {
+    "gantt": "Planificateur Gantt",
+    "dashboard": "Tableau de Bord",
+    "planner": "Planificateur",
+    "aiPlanner": "Planificateur IA",
+    "aiAgent": "Agent de Données IA",
+    "simulator": "Simulateur d'Usine",
+    "orderDatabase": "Base de Données des Commandes",
+    "versatilityGrid": "Grille de Polyvalence",
+    "masterTasks": "Tâches Maîtres"
+  },
+  "pageTitle": {
+    "gantt": "Planificateur Gantt",
+    "admin": "Planificateur",
+    "aiPlanner": "Planificateur Automatisé par IA",
+    "aiAgent": "Agent de Données IA",
+    "simulator": "Simulateur d'Usine",
+    "orderlog": "Base de Données des Commandes",
+    "userlog": "Polyvalence des Opérateurs",
+    "taskdatabase": "Liste des Tâches Maîtres"
+  },
+    "header": {
+    "printSchedule": "Imprimer le Planning",
+    "toggleColumns": "Afficher/Masquer les Colonnes",
+    "week": "Semaine {0}",
+    "scheduleInfo": "Informations sur le Planning"
+  },
+  "columns": {
+    "task": "Tâche",
+    "orderId": "ID Commande",
+    "quality": "Qualité",
+    "realisation": "Réalisation",
+    "assignedTo": "Assigné à",
+    "status": "Statut",
+    "progress": "Progression",
+    "dueBy": "Date Limite",
+    "duration": "Durée",
+    "program": "Programme",
+    "subProgram": "Sous-Programme",
+    "defaultDuration": "Durée par Défaut",
+    "bestMatch": "Meilleur profil",
+    "shortName": "Nom Court"
+  },
+  "days": {
+    "long": ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"],
+    "short": ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"]
+  },
+  "taskStatus": {
+    "ToDo": "À Faire",
+    "InProgress": "En Cours",
+    "Completed": "Terminé",
+    "OnHold": "En Attente",
+    "QualityOK": "Qualité OK"
+  },
+  "rank": {
+    "Master": "Maître",
+    "Senior": "Sénior",
+    "Junior": "Junior",
+    "Trainee": "Stagiaire",
+    "Unranked": "Non classé"
+  },
+  "rankWithCount": {
+    "Master": "Maître (10+)",
+    "Senior": "Sénior (7-9)",
+    "Junior": "Junior (5-6)",
+    "Trainee": "Stagiaire (1-4)",
+    "Unranked": "Non classé (0)"
+  },
+  "gantt": {
+    "quality": {
+        "checkableTooltip": "Marquer comme Qualité OK",
+        "checkedTooltip": "Qualité Approuvée",
+        "disabledTooltip": "La tâche doit d'abord être 'Terminée'"
+    },
+    "realisation": {
+        "hours": "{0}h"
+    },
+    "duration": {
+        "hours": "{0}h"
+    },
+    "resizeColumn": "Redimensionner la colonne {0}",
+    "tooltip": {
+        "task": "{0} - {1}% terminé",
+        "resizeStart": "Ajuster l'heure de début",
+        "resizeEnd": "Ajuster la durée",
+        "adjustProgress": "Ajuster la progression",
+        "overdue": "Tâche en retard"
+    }
+  },
+  "ganttFilters": {
+    "program": "Programme",
+    "subProgram": "Sous-Programme",
+    "operator": "Opérateur",
+    "criticalOnly": "Critiques seulement",
+    "clear": "Effacer les filtres"
+  },
+  "details": {
+    "backToOperator": "Retour à {0}",
+    "status": "Statut",
+    "progress": "Progression",
+    "assignedTo": "Assigné à",
+    "startDate": "Date de début",
+    "endDate": "Date de fin",
+    "startTime": "Heure de début",
+    "endTime": "Heure de fin",
+    "due": "Dû",
+    "duration": "Durée",
+    "hours": "{0} Heure(s)",
+    "notes": "Notes de blocage",
+    "description": "Description",
+    "dependencies": "Dépendances",
+    "prerequisites": "Prérequis",
+    "dependents": "Dépendantes",
+    "critical": "Tâche Critique"
+  },
+  "dependencyModal": {
+      "title": "Gérer les Dépendances",
+      "description": "Sélectionnez les tâches qui doivent être terminées avant que '{0}' puisse commencer.",
+      "search": "Rechercher une tâche à ajouter...",
+      "errorCircular": "Impossible d'ajouter la dépendance : cela créerait une référence circulaire."
+  },
+  "operatorDetails": {
+    "title": "Opérateur",
+    "assignedTasks": "Tâches Assignées ({0})",
+    "noTasks": "Aucune tâche assignée à cet opérateur."
+  },
+  "admin": {
+    "title": "Planificateur",
+    "description": "Sélectionnez une ou plusieurs tâches de la liste, puis cliquez sur la chronologie d'un opérateur pour planifier.",
+    "unplannedTitle": "Commandes Non Planifiées ({0})",
+    "readyToPlanTitle": "Prêtes à Planifier ({0})",
+    "noReadyTasks": "Toutes les commandes disponibles sont planifiées ou bloquées.",
+    "waitingForDependenciesTitle": "En Attente de Dépendances ({0})",
+    "waitingOn": "Attend {0} tâche(s)",
+    "blockedTitle": "Bloquées ({0})",
+    "allPlanned": "Toutes les commandes ont été planifiées !",
+    "operatorsTitle": "Chronologies des Opérateurs",
+    "stagedChanges": "{0} changements en attente",
+    "dragOrClickToPlan": "Glisser ou cliquer pour planifier : {0}",
+    "clickToAssign": "Cliquer pour assigner à {0}",
+    "taskBlocked": "La tâche est bloquée : {0}",
+    "note": "Note",
+    "due": "Dû",
+    "duration": "{0}h",
+    "workload": "{0} heures planifiées",
+    "suggested": "Suggéré",
+    "filters": {
+      "program": "Programme",
+      "subProgram": "Sous-Programme",
+      "criticalOnly": "Critiques seulement",
+      "clear": "Effacer les filtres"
+    },
+    "actions": {
+        "block": "Bloquer la tâche...",
+        "blockReasonPrompt": "Veuillez indiquer une raison pour bloquer cette tâche.",
+        "blockReasonDefault": "Pièces manquantes",
+        "complete": "Marquer comme Terminé",
+        "unblock": "Marquer comme Prêt à Planifier"
+    }
+  },
+  "orderlog": {
+    "description": "Un journal complet de toutes les commandes de fabrication planifiées et non planifiées.",
+    "searchPlaceholder": "Rechercher par nom ou ID de commande...",
+    "export": {
+        "button": "Exporter en XLSX",
+        "noData": "Il n'y a aucune donnée à exporter."
+    },
+    "filters": {
+        "title": "Filtres",
+        "program": "Programme",
+        "status": "Statut",
+        "assignedTo": "Assigné à",
+        "all": "Tout",
+        "planned": "Planifié",
+        "unplanned": "Non Planifié"
+    },
+    "noOrders": "Aucune commande ne correspond à vos critères.",
+    "upload": {
+        "button": "Téléverser Données",
+        "title": "Vérifier le Téléversement",
+        "summary": "Vous êtes sur le point d'ajouter {0} nouvelles tâches et de mettre à jour {1} tâches existantes. Veuillez vérifier les changements ci-dessous.",
+        "failed": "Échec du Téléversement",
+        "unknownError": "Une erreur inconnue est survenue.",
+        "notReadable": "Le contenu du fichier n'est pas lisible.",
+        "invalidJsonFormat": "Format JSON invalide. Un tableau d'objets de tâches est attendu.",
+        "emptyFile": "Le contenu du fichier est vide.",
+        "missingFields": "Aucune ligne de données valide trouvée. Veuillez vous assurer que les colonnes requises (par ex. 'Nom', 'ID Commande') sont présentes et contiennent des données.",
+        "foundHeaders": "Les en-têtes suivants ont été trouvés dans votre fichier",
+        "invalidId": "ID invalide dans la ligne : {0}",
+        "unsupportedType": "Type de fichier non supporté. Veuillez utiliser .json ou .xlsx.",
+        "table": {
+            "change": "Changement",
+            "orderId": "ID Commande",
+            "taskName": "Nom de la Tâche",
+            "status": "Statut"
+        },
+        "changeType": {
+            "new": "Nouveau",
+            "update": "Mise à jour"
+        }
+    },
+    "unrecognized": {
+        "title": "Tâches non reconnues trouvées",
+        "description": "Les tâches suivantes de votre fichier ne figurent pas dans la liste des tâches maîtres. Veuillez définir leurs propriétés pour les ajouter avant de continuer.",
+        "confirm": "Ajouter à la liste & Continuer",
+        "cancel": "Annuler le téléversement"
+    }
+  },
+  "userlog": {
+    "description": "Polyvalence des opérateurs par tâche, montrant le nombre de fois que chaque tâche a été effectuée.",
+    "editInstruction": "Cliquez sur une cellule pour modifier manuellement le nombre de tâches terminées d'un opérateur.",
+    "unsavedChanges": "Vous avez des modifications non enregistrées.",
+    "actions": {
+      "addTask": "Ajouter Tâche",
+      "settings": "Paramètres"
+    },
+    "filters": {
+      "title": "Filtres",
+      "byProgram": "Par Programme",
+      "searchPrograms": "Rechercher des programmes...",
+      "byOperator": "Par Opérateur",
+      "searchOperators": "Rechercher des opérateurs..."
+    },
+    "metrics": {
+      "teamVersatility": "Score de Polyvalence d'Équipe",
+      "totalCompletions": "Tâches Terminées (Total)",
+      "masterOperators": "Opérateurs de Rang Maître",
+      "mostVersatile": "Opérateur le Plus Polyvalent"
+    }
+  },
+  "addTaskModal": {
+    "title": "Ajouter une Nouvelle Tâche Maître",
+    "name": "Nom de la Tâche",
+    "shortName": "Nom Court (ex: FUS-1A)",
+    "program": "Programme",
+    "subProgram": "Sous-Programme",
+    "defaultDuration": "Durée par Défaut (heures)",
+    "create": "Créer la Tâche"
+  },
+  "settingsModal": {
+    "title": "Modifier les Règles de Compétence",
+    "description": "Définissez le nombre minimum de réalisations requises pour atteindre chaque rang de compétence.",
+    "save": "Enregistrer les Paramètres",
+    "error": {
+      "allFieldsRequired": "Tous les champs sont requis et la durée doit être positive."
+    }
+  },
+  "versatility": {
+    "legend": "Légende de Polyvalence",
+    "tooltip": {
+        "operator": "Opérateur",
+        "task": "Tâche",
+        "performed": "Effectué",
+        "times": "fois",
+        "rank": "Rang",
+        "override": "La valeur a été modifiée manuellement par un administrateur."
+    }
+  },
+  "taskdatabase": {
+    "description": "La liste canonique de toutes les tâches réalisables et leurs propriétés par défaut.",
+    "searchPlaceholder": "Rechercher par programme, nom...",
+    "hours": "{0} h",
+    "noTasks": "Aucune tâche ne correspond à vos critères.",
+    "actions": {
+      "title": "Actions",
+      "edit": "Modifier",
+      "delete": "Supprimer",
+      "save": "Enregistrer",
+      "cancel": "Annuler"
+    },
+    "delete": {
+      "confirmMessage": "Êtes-vous sûr de vouloir supprimer la tâche maître '{0}' ? Cette action est irréversible.",
+      "inUseError": "Impossible de supprimer '{0}' car elle est utilisée dans des commandes existantes. Veuillez d'abord la retirer de toutes les commandes."
+    },
+    "add": {
+      "button": "Ajouter Nouvelle Tâche",
+      "duplicateError": "Une tâche maître avec le nom '{0}' existe déjà."
+    },
+    "upload": {
+      "button": "Téléverser Tâches",
+      "title": "Vérifier le Téléversement des Tâches Maîtres",
+      "summary": "Vous êtes sur le point d'ajouter {0} nouvelles tâches maîtres. Les tâches déjà existantes (par nom) ont été automatiquement ignorées.",
+      "failed": "Échec du Téléversement",
+      "noNewTasks": "Aucune nouvelle tâche trouvée dans le fichier. Toutes les tâches existent déjà ou le fichier est invalide/vide.",
+      "missingFields": "Aucune ligne de données valide trouvée. Veuillez vous assurer que les colonnes requises (par ex. 'Nom', 'Programme', 'Sous-Programme', 'Nom Court', 'Durée par Défaut') sont présentes et contiennent des données.",
+      "foundHeaders": "Les en-têtes suivants ont été trouvés dans votre fichier",
+      "invalidJsonFormat": "Format JSON invalide. Un tableau d'objets de tâches maîtres est attendu.",
+      "table": {
+        "program": "Programme",
+        "taskName": "Nom de la Tâche",
+        "duration": "Durée"
+      }
+    }
+  },
+  "dashboard": {
+    "title": "Tableau de Bord",
+    "subtitle": "Aperçu du Planning",
+    "metrics": {
+      "planned": "Tâches Planifiées",
+      "unplanned": "Tâches Non Planifiées",
+      "hours": "Heures Planifiées",
+      "progress": "Progression Globale",
+      "overdue": "Tâches en Retard"
+    },
+    "filters": {
+      "title": "Filtres",
+      "showOverdueOnly": "Afficher Uniquement les Retards",
+      "byStatus": "Par Statut",
+      "byOperator": "Par Opérateur",
+      "searchOperators": "Rechercher des opérateurs..."
+    },
+    "charts": {
+        "statusDistribution": "Répartition des Statuts",
+        "operatorWorkload": "Charge de Travail par Opérateur",
+        "programProgress": "Progression par Programme"
+    },
+    "urgentTasks": "Tâches Urgentes / En Retard",
+    "noUrgentTasks": "Aucune tâche urgente",
+    "overdueLabel": "En Retard",
+    "day": "Jour",
+    "hour": "Heure"
+  },
+  "aiPlanner": {
+    "title": "Planificateur Automatisé par IA",
+    "description": "Laissez l'IA analyser les tâches non planifiées, la compétence des opérateurs et les charges de travail actuelles pour générer un planning optimisé.",
+    "runButton": "Lancer le Planificateur IA",
+    "unplannedTasksTitle": "Tâches à planifier ({0})",
+    "noTasks": "Il n'y a aucune tâche non planifiée à programmer pour l'IA.",
+    "loading": {
+      "title": "L'IA planifie...",
+      "messages": [
+        "Analyse des exigences des tâches...",
+        "Consultation de la grille de polyvalence des opérateurs...",
+        "Équilibrage des charges de travail de l'équipe...",
+        "Optimisation en fonction des dates d'échéance...",
+        "Finalisation du planning..."
+      ]
+    },
+    "results": {
+      "title": "Plan Généré par l'IA",
+      "description": "L'IA a généré le plan suivant. Examinez les affectations et les justifications ci-dessous.",
+      "accept": "Accepter & Planifier",
+      "reject": "Rejeter & Réinitialiser",
+      "table": {
+        "task": "Tâche",
+        "orderId": "ID Commande",
+        "operator": "Opérateur Proposé",
+        "proficiency": "Compétence",
+        "justification": "Justification"
+      }
+    },
+    "error": {
+      "title": "Une Erreur est Survenue",
+      "message": "Le planificateur IA a rencontré un problème. Veuillez réessayer.",
+      "apiError": "Le planificateur IA a rencontré une erreur : {0}"
+    }
+  },
+  "aiAgent": {
+    "title": "Agent de Données IA",
+    "description": "Votre assistant pour importer, nettoyer et valider les nouvelles données de tâches.",
+    "greeting": "Bonjour ! Je suis l'Agent de Données IA. Je peux vous aider à importer de nouvelles tâches à partir d'un fichier. Veuillez téléverser un fichier JSON ou XLSX pour commencer.",
+    "uploadButton": "Téléverser un Fichier",
+    "userUpload": "Vous avez téléversé un fichier : {0}",
+    "analysis": {
+      "start": "Parfait, j'analyse le fichier. Cela peut prendre un instant...",
+      "summary": "Voici ce que j'ai trouvé :",
+      "newMasterTasks": "Il y a {0} nouvelles tâches maîtres potentielles qui n'existent pas dans votre base de données actuelle.",
+      "newData": "Le fichier contient {0} nouvelles commandes et {1} mises à jour de commandes existantes.",
+      "issues": "J'ai également trouvé {0} problèmes potentiels de qualité des données qui nécessitent votre attention."
+    },
+    "steps": {
+      "reviewMaster": {
+        "title": "Vérifier les Nouvelles Tâches Maîtres",
+        "description": "Veuillez vérifier les tâches suivantes. Vous pouvez modifier leurs propriétés avant que je les ajoute à la liste maîtresse.",
+        "confirm": "Confirmer les Tâches Maîtres"
+      },
+      "reviewIssues": {
+        "title": "Vérifier les Problèmes de Qualité des Données",
+        "description": "Les lignes suivantes présentent des problèmes potentiels. Pour l'instant, elles seront ignorées lors de l'importation.",
+        "issue": "Problème",
+        "confirm": "Compris & Continuer"
+      },
+      "reviewChanges": {
+        "title": "Confirmer les Changements",
+        "description": "Voici un résumé final des changements. Les nouvelles tâches seront ajoutées à la liste 'non planifiées' dans le Planificateur.",
+        "newTasks": "Nouvelles Tâches à Ajouter ({0})",
+        "updatedTasks": "Tâches à Mettre à Jour ({0})",
+        "confirm": "Appliquer tous les Changements",
+        "startOver": "Recommencer"
+      },
+      "complete": {
+        "title": "Importation Terminée !",
+        "description": "Tous les changements ont été appliqués. Vous pouvez maintenant trouver les nouvelles tâches dans la Base de Données des Commandes ou les planifier dans le Planificateur.",
+        "again": "Importer un Autre Fichier"
+      }
+    },
+    "error": {
+      "title": "Une Erreur est Survenue",
+      "api": "L'agent IA a rencontré un problème : {0}",
+      "file": "Un problème est survenu lors du traitement de votre fichier : {0}"
+    }
+  },
+  "simulator": {
+    "title": "Simulateur d'Usine",
+    "description": "Utilisez l'IA pour générer de nouvelles commandes d'usine afin de tester la robustesse du planning et d'identifier les goulots d'étranglement potentiels.",
+    "runButton": "Générer Nouvelle Commande",
+    "loadingTitle": "L'IA génère une commande...",
+    "noMasterTasks": "Impossible de lancer le simulateur. Au moins une tâche maître doit exister.",
+    "lastGenerated": "Dernière Commande Générée",
+    "noOrderGenerated": "Aucune commande n'a encore été générée.",
+    "orderId": "ID Commande",
+    "productName": "Produit",
+    "priority": "Priorité",
+    "tasks": "Tâches ({0})",
+    "critical": "Critique",
+    "error": {
+      "title": "Échec de la Simulation",
+      "message": "L'IA n'a pas pu générer de nouvelle commande. Veuillez vérifier la console pour plus de détails et réessayer.",
+      "apiError": "Le simulateur IA a rencontré un problème : {0}"
+    },
+    "priorityLevel": {
+        "normal": "Normale",
+        "high": "Haute",
+        "rush": "Urgente"
+    }
+  },
+  "actions": {
+    "close": "Fermer",
+    "clearAll": "Tout Effacer",
+    "clearSelection": "Effacer la Sélection",
+    "clearFilters": "Effacer les Filtres",
+    "assign": "Assigner",
+    "retry": "Réessayer",
+    "suggestMatch": "Suggérer Profil",
+    "cancel": "Annuler",
+    "confirm": "Confirmer & Appliquer",
+    "save": "Enregistrer",
+    "saveChanges": "Enregistrer",
+    "discard": "Annuler les modifs",
+    "edit": "Modifier",
+    "manageDependencies": "Gérer les Dépendances"
+  },
+  "unassigned": "Non assigné",
+  "unplanned": "Non planifié",
+  "na": "N/A",
+  "error": "Erreur",
+  "schedule": {
+    "title": "Informations sur le Planning",
+    "currentTime": "Heure Actuelle",
+    "workingHours": "Heures de Travail",
+    "workingHoursValue": "08:00 - 17:00",
+    "breaks": "Pauses",
+    "lunchBreak": "Pause Déjeuner",
+    "lunchBreakValue": "12:00 - 13:00",
+    "coffeeBreak": "Pause Café",
+    "coffeeBreakValue": "10:00 & 15:00 (15 min)",
+    "nonWorkingDays": "Jours Non Ouvrés",
+    "nonWorkingDaysValue": "Samedi, Dimanche"
+  }
+}

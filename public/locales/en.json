@@ -1,0 +1,468 @@
+{
+  "language": "Language",
+  "english": "English",
+  "french": "Français",
+  "app": {
+    "saved": "Saved.",
+    "saveError": "Save failed."
+  },
+  "nav": {
+    "gantt": "Gantt",
+    "dashboard": "Dashboard",
+    "planner": "Planner",
+    "aiPlanner": "AI Planner",
+    "aiAgent": "AI Agent",
+    "simulator": "Simulator",
+    "orderDatabase": "Orders",
+    "versatilityGrid": "Versatility",
+    "masterTasks": "Tasks"
+  },
+  "pageTitle": {
+    "gantt": "Gantt",
+    "admin": "Planner",
+    "aiPlanner": "AI Planner",
+    "aiAgent": "AI Agent",
+    "simulator": "Simulator",
+    "orderlog": "Orders",
+    "userlog": "Versatility",
+    "taskdatabase": "Task List"
+  },
+    "header": {
+    "printSchedule": "Print",
+    "toggleColumns": "Columns",
+    "week": "Week {0}",
+    "scheduleInfo": "Info"
+  },
+  "columns": {
+    "task": "Task",
+    "orderId": "Order ID",
+    "quality": "Quality",
+    "realisation": "Realisation",
+    "assignedTo": "Assigned To",
+    "status": "Status",
+    "progress": "Progress",
+    "dueBy": "Due By",
+    "duration": "Duration",
+    "program": "Program",
+    "subProgram": "Sub-Program",
+    "defaultDuration": "Default Duration",
+    "bestMatch": "Best Match",
+    "shortName": "Short Name"
+  },
+  "days": {
+    "long": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    "short": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+  },
+  "taskStatus": {
+    "ToDo": "To Do",
+    "InProgress": "In Progress",
+    "Completed": "Completed",
+    "OnHold": "On Hold",
+    "QualityOK": "Quality OK"
+  },
+  "rank": {
+    "Master": "Master",
+    "Senior": "Senior",
+    "Junior": "Junior",
+    "Trainee": "Trainee",
+    "Unranked": "Unranked"
+  },
+  "rankWithCount": {
+    "Master": "Master (10+)",
+    "Senior": "Senior (7-9)",
+    "Junior": "Junior (5-6)",
+    "Trainee": "Trainee (1-4)",
+    "Unranked": "Unranked (0)"
+  },
+  "gantt": {
+    "quality": {
+        "checkableTooltip": "Mark as Quality OK",
+        "checkedTooltip": "Quality Approved",
+        "disabledTooltip": "Task must be 'Completed' first"
+    },
+    "realisation": {
+        "hours": "{0}hr"
+    },
+    "duration": {
+        "hours": "{0}hr"
+    },
+    "resizeColumn": "Resize {0} column",
+    "tooltip": {
+        "task": "{0} - {1}% complete",
+        "resizeStart": "Adjust start time",
+        "resizeEnd": "Adjust duration",
+        "adjustProgress": "Adjust progress",
+        "overdue": "Task is overdue"
+    }
+  },
+   "ganttFilters": {
+    "program": "Program",
+    "subProgram": "Sub-Program",
+    "operator": "Operator",
+    "criticalOnly": "Show Critical Only",
+    "clear": "Clear Filters"
+  },
+  "details": {
+    "backToOperator": "Back to {0}",
+    "status": "Status",
+    "progress": "Progress",
+    "assignedTo": "Assigned To",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "startTime": "Start Time",
+    "endTime": "End Time",
+    "due": "Due",
+    "duration": "Duration",
+    "hours": "{0} Hour(s)",
+    "notes": "Blocker Notes",
+    "description": "Description",
+    "dependencies": "Dependencies",
+    "prerequisites": "Prerequisites",
+    "dependents": "Dependents",
+    "critical": "Critical Task"
+  },
+  "dependencyModal": {
+      "title": "Manage Dependencies",
+      "description": "Select the tasks that must be completed before '{0}' can begin.",
+      "search": "Search for a task to add...",
+      "errorCircular": "Cannot add dependency: This would create a circular reference."
+  },
+  "operatorDetails": {
+    "title": "Operator",
+    "assignedTasks": "Assigned Tasks ({0})",
+    "noTasks": "No tasks assigned to this operator."
+  },
+  "admin": {
+    "title": "Planner",
+    "description": "Select tasks and click an operator timeline to schedule.",
+    "unplannedTitle": "Unplanned ({0})",
+    "readyToPlanTitle": "Ready ({0})",
+    "noReadyTasks": "All available orders are planned or blocked.",
+    "waitingForDependenciesTitle": "Waiting on Dependencies ({0})",
+    "waitingOn": "Waiting on {0} task(s)",
+    "blockedTitle": "Blocked ({0})",
+    "allPlanned": "All orders have been planned!",
+    "operatorsTitle": "Operator Timelines",
+    "stagedChanges": "{0} staged changes",
+    "dragOrClickToPlan": "Drag or click to plan: {0}",
+    "clickToAssign": "Click to assign to {0}",
+    "taskBlocked": "Task is blocked: {0}",
+    "note": "Note",
+    "due": "Due",
+    "duration": "{0}hr",
+    "workload": "{0} hours planned",
+    "suggested": "Suggested",
+    "filters": {
+      "program": "Program",
+      "subProgram": "Sub-Program",
+      "criticalOnly": "Show Critical Only",
+      "clear": "Clear Filters"
+    },
+    "actions": {
+        "block": "Block Task...",
+        "blockReasonPrompt": "Please provide a reason for blocking this task.",
+        "blockReasonDefault": "Missing parts",
+        "complete": "Mark as Complete",
+        "unblock": "Mark as Ready to Plan"
+    }
+  },
+  "orderlog": {
+    "description": "Log of planned and unplanned orders.",
+    "searchPlaceholder": "Search ID or Name...",
+    "export": {
+        "button": "Export as XLSX",
+        "noData": "There is no data to export."
+    },
+    "filters": {
+        "title": "Filters",
+        "program": "Program",
+        "status": "Status",
+        "assignedTo": "Assigned To",
+        "all": "All",
+        "planned": "Planned",
+        "unplanned": "Unplanned"
+    },
+    "noOrders": "No orders found matching your criteria.",
+    "upload": {
+        "button": "Upload Data",
+        "title": "Review Data Upload",
+        "summary": "You are about to add {0} new tasks and update {1} existing tasks. Please review the changes below.",
+        "failed": "Upload Failed",
+        "unknownError": "An unknown error occurred during file processing.",
+        "notReadable": "File content is not readable text.",
+        "invalidJsonFormat": "Invalid JSON format. Expected an array of task objects.",
+        "emptyFile": "File content is empty.",
+        "missingFields": "No valid data rows were found. Please ensure the required columns (e.g., 'Name', 'Order ID') are present and contain data.",
+        "foundHeaders": "The following headers were found in your file",
+        "invalidId": "Invalid ID in row: {0}",
+        "unsupportedType": "Unsupported file type. Please upload a .json or .xlsx file.",
+        "table": {
+            "change": "Change",
+            "orderId": "Order ID",
+            "taskName": "Task Name",
+            "status": "Status"
+        },
+        "changeType": {
+            "new": "New",
+            "update": "Update"
+        }
+    },
+    "unrecognized": {
+        "title": "Unrecognized Tasks Found",
+        "description": "The following tasks from your upload are not in the Master Task list. Please define their properties to add them before proceeding.",
+        "confirm": "Add to Master List & Continue",
+        "cancel": "Cancel Upload"
+    }
+  },
+  "userlog": {
+    "description": "Operator proficiency and task counts.",
+    "editInstruction": "Click cell to edit count.",
+    "unsavedChanges": "Unsaved changes.",
+    "actions": {
+      "addTask": "Add New Task",
+      "settings": "Settings"
+    },
+    "filters": {
+      "title": "Filters",
+      "byProgram": "By Program",
+      "searchPrograms": "Search programs...",
+      "byOperator": "By Operator",
+      "searchOperators": "Search operators..."
+    },
+    "metrics": {
+      "teamVersatility": "Team Versatility Score",
+      "totalCompletions": "Total Task Completions",
+      "masterOperators": "Operators with Master Rank",
+      "mostVersatile": "Most Versatile Operator"
+    }
+  },
+  "addTaskModal": {
+    "title": "Add New Master Task",
+    "name": "Task Name",
+    "shortName": "Short Name (e.g., FUS-1A)",
+    "program": "Program",
+    "subProgram": "Sub-Program",
+    "defaultDuration": "Default Duration (hours)",
+    "create": "Create Task"
+  },
+  "settingsModal": {
+    "title": "Edit Proficiency Rules",
+    "description": "Set the minimum number of completions required to achieve each proficiency rank.",
+    "save": "Save Settings",
+    "error": {
+      "allFieldsRequired": "All fields are required and duration must be positive."
+    }
+  },
+  "versatility": {
+    "legend": "Proficiency Legend",
+    "tooltip": {
+        "operator": "Operator",
+        "task": "Task",
+        "performed": "Performed",
+        "times": "time(s)",
+        "rank": "Rank",
+        "override": "Value has been manually overridden by an administrator."
+    }
+  },
+  "taskdatabase": {
+    "description": "The canonical list of all performable tasks and their default properties.",
+    "searchPlaceholder": "Search by program, name, etc...",
+    "hours": "{0} hrs",
+    "noTasks": "No tasks found matching your criteria.",
+    "actions": {
+      "title": "Actions",
+      "edit": "Edit",
+      "delete": "Delete",
+      "save": "Save",
+      "cancel": "Cancel"
+    },
+    "delete": {
+      "confirmMessage": "Are you sure you want to delete the master task '{0}'? This action cannot be undone.",
+      "inUseError": "Cannot delete '{0}' as it is used in existing orders. Please remove it from all orders first."
+    },
+    "add": {
+      "button": "Add New Task",
+      "duplicateError": "A master task with the name '{0}' already exists."
+    },
+    "upload": {
+      "button": "Upload Tasks",
+      "title": "Review Master Tasks Upload",
+      "summary": "You are about to add {0} new master tasks. Tasks that already exist (by name) have been automatically ignored.",
+      "failed": "Upload Failed",
+      "noNewTasks": "No new tasks found in the file. All tasks either already exist or the file is invalid.",
+      "missingFields": "No valid data rows were found. Please ensure the required columns (e.g., 'Name', 'Program', 'Sub-Program', 'Short Name', 'Default Duration') are present and contain data.",
+      "foundHeaders": "The following headers were found in your file",
+      "invalidJsonFormat": "Invalid JSON format. Expected an array of master task objects.",
+      "table": {
+        "program": "Program",
+        "taskName": "Task Name",
+        "duration": "Duration"
+      }
+    }
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "subtitle": "Schedule Overview",
+    "metrics": {
+        "planned": "Planned Tasks",
+        "unplanned": "Unplanned Tasks",
+        "hours": "Hours Scheduled",
+        "progress": "Overall Progress",
+        "overdue": "Overdue Tasks"
+    },
+    "filters": {
+        "title": "Filters",
+        "showOverdueOnly": "Show Overdue Only",
+        "byStatus": "By Status",
+        "byOperator": "By Operator",
+        "searchOperators": "Search operators..."
+    },
+    "charts": {
+        "statusDistribution": "Status Distribution",
+        "operatorWorkload": "Operator Workload",
+        "programProgress": "Program Progress"
+    },
+    "urgentTasks": "Urgent / Overdue Tasks",
+    "noUrgentTasks": "No urgent tasks",
+    "overdueLabel": "Overdue",
+    "day": "Day",
+    "hour": "Hour"
+  },
+  "aiPlanner": {
+    "title": "AI Planner",
+    "description": "AI-optimized scheduling based on workload and proficiency.",
+    "runButton": "Run AI Planner",
+    "unplannedTasksTitle": "Tasks to be Planned ({0})",
+    "noTasks": "There are no unplanned tasks for the AI to schedule.",
+    "loading": {
+      "title": "AI is planning...",
+      "messages": [
+        "Analyzing task requirements...",
+        "Consulting operator proficiency grid...",
+        "Balancing workloads across the team...",
+        "Optimizing for due dates...",
+        "Finalizing the schedule..."
+      ]
+    },
+    "results": {
+      "title": "AI-Generated Plan",
+      "description": "The AI has generated the following plan. Review the assignments and justifications below.",
+      "accept": "Accept & Schedule",
+      "reject": "Reject & Reset",
+      "table": {
+        "task": "Task",
+        "orderId": "Order ID",
+        "operator": "Proposed Operator",
+        "proficiency": "Proficiency",
+        "justification": "Justification"
+      }
+    },
+    "error": {
+      "title": "An Error Occurred",
+      "message": "The AI planner encountered an issue. Please try again.",
+      "apiError": "The AI planner encountered an issue: {0}"
+    }
+  },
+  "aiAgent": {
+    "title": "AI Agent",
+    "description": "Data import and validation assistant.",
+    "greeting": "Hello. I can help import tasks. Upload JSON or XLSX.",
+    "uploadButton": "Upload File",
+    "userUpload": "You uploaded a file: {0}",
+    "analysis": {
+      "start": "Great, I'm analyzing the file now. This may take a moment...",
+      "summary": "Here's what I found:",
+      "newMasterTasks": "There are {0} potential new master tasks that don't exist in your current database.",
+      "newData": "The file contains {0} new orders and {1} updates to existing orders.",
+      "issues": "I also found {0} potential data quality issues that need your attention."
+    },
+    "steps": {
+      "reviewMaster": {
+        "title": "Review New Master Tasks",
+        "description": "Please review the following tasks. You can edit their properties before I add them to the master list.",
+        "confirm": "Confirm Master Tasks"
+      },
+      "reviewIssues": {
+        "title": "Review Data Quality Issues",
+        "description": "The following rows have potential issues. For now, they will be skipped during import.",
+        "issue": "Issue",
+        "confirm": "Acknowledge & Continue"
+      },
+      "reviewChanges": {
+        "title": "Confirm Changes",
+        "description": "Here is a final summary of the changes. The new tasks will be added to the 'unplanned' list in the Planner.",
+        "newTasks": "New Tasks to Add ({0})",
+        "updatedTasks": "Tasks to Update ({0})",
+        "confirm": "Apply All Changes",
+        "startOver": "Start Over"
+      },
+      "complete": {
+        "title": "Import Complete!",
+        "description": "All changes have been applied. You can now find the new tasks in the Order Database or schedule them in the Planner.",
+        "again": "Import Another File"
+      }
+    },
+    "error": {
+      "title": "An Error Occurred",
+      "api": "The AI agent encountered an issue: {0}",
+      "file": "There was a problem processing your file: {0}"
+    }
+  },
+  "simulator": {
+    "title": "Simulator",
+    "description": "Generate simulated orders to test scheduling capacity.",
+    "runButton": "Generate",
+    "loadingTitle": "AI is generating an order...",
+    "noMasterTasks": "Cannot run simulator. At least one master task must exist.",
+    "lastGenerated": "Last Generated Order",
+    "noOrderGenerated": "No order has been generated yet.",
+    "orderId": "Order ID",
+    "productName": "Product",
+    "priority": "Priority",
+    "tasks": "Tasks ({0})",
+    "critical": "Critical",
+    "error": {
+      "title": "Simulation Failed",
+      "message": "The AI failed to generate a new order. Please check the console for details and try again.",
+      "apiError": "The AI simulator encountered an issue: {0}"
+    },
+    "priorityLevel": {
+        "normal": "Normal",
+        "high": "High",
+        "rush": "Rush"
+    }
+  },
+  "actions": {
+    "close": "Close",
+    "clearAll": "Clear All",
+    "clearSelection": "Clear Selection",
+    "clearFilters": "Clear Filters",
+    "assign": "Assign",
+    "retry": "Retry",
+    "suggestMatch": "Suggest Match",
+    "cancel": "Cancel",
+    "confirm": "Confirm & Apply Changes",
+    "save": "Save",
+    "saveChanges": "Save Changes",
+    "discard": "Discard",
+    "edit": "Edit",
+    "manageDependencies": "Manage Dependencies"
+  },
+  "unassigned": "Unassigned",
+  "unplanned": "Unplanned",
+  "na": "N/A",
+  "error": "Error",
+  "schedule": {
+    "title": "Schedule Information",
+    "currentTime": "Current Time",
+    "workingHours": "Working Hours",
+    "workingHoursValue": "08:00 - 17:00",
+    "breaks": "Breaks",
+    "lunchBreak": "Lunch Break",
+    "lunchBreakValue": "12:00 - 13:00",
+    "coffeeBreak": "Coffee Break",
+    "coffeeBreakValue": "10:00 & 15:00 (15 min)",
+    "nonWorkingDays": "Non-Working Days",
+    "nonWorkingDaysValue": "Saturday, Sunday"
+  }
+}
