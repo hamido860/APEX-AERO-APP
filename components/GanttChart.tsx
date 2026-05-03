@@ -604,7 +604,7 @@ const GanttChart: React.FC<GanttChartProps> = ({ tasks, allTasks, allOperators, 
                     {/* Current Time Header Marker */}
                     {currentTimeLeft !== null && (
                         <div 
-                            className="absolute top-0 bottom-0 w-px bg-red-500 z-30 pointer-events-none"
+                            className="absolute top-0 bottom-0 w-px bg-red-500 z-10 pointer-events-none"
                             style={{ left: currentTimeLeft }}
                         >
                             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2 h-2 bg-red-500 rounded-full shadow-[0_0_8px_rgba(239,68,68,0.8)]"></div>
@@ -629,7 +629,7 @@ const GanttChart: React.FC<GanttChartProps> = ({ tasks, allTasks, allOperators, 
                 {/* Current Time Line */}
                 {currentTimeLeft !== null && (
                     <div 
-                        className="absolute top-0 bottom-0 w-px bg-red-500 z-30 pointer-events-none"
+                        className="absolute top-0 bottom-0 w-px bg-red-500 z-10 pointer-events-none"
                         style={{ left: totalLeftWidth + currentTimeLeft }}
                     >
                         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2 h-2 bg-red-500 rounded-full shadow-[0_0_8px_rgba(239,68,68,0.8)]"></div>
