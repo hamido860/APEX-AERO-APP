@@ -1,0 +1,3 @@
+## 2025-03-01 - Add ARIA accessibility to Dropdown Components
+**Learning:** Custom dropdown components like `FilterDropdown` lack native screen reader semantics out of the box, meaning users may not know their state (open/closed) or if they trigger a pop-up.
+**Action:** Always add `aria-expanded`, `aria-haspopup`, and link the toggle button to the dropdown body using `aria-controls` with a generated ID. This makes custom dropdowns navigable and understandable for screen reader users.
