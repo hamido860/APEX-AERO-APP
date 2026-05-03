@@ -169,7 +169,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
     }, [isColumnMenuOpen, onSetIsColumnMenuOpen, isLangMenuOpen]);
 
     return (
-        <header className="bg-white dark:bg-slate-900 px-8 py-3 border-b border-slate-200 dark:border-slate-800/50 flex-shrink-0 flex justify-between items-center gap-6 z-30 transition-colors duration-300">
+        <header className="relative bg-white dark:bg-slate-900 px-8 py-3 border-b border-slate-200 dark:border-slate-800/50 flex-shrink-0 flex justify-between items-center gap-6 z-30 transition-colors duration-300">
             <div className="flex items-center gap-8">
                  <div className="flex flex-col">
                     <span className="text-[9px] font-bold text-cyan-500 uppercase tracking-[0.25em] mb-0.5">Apex Aero Systems</span>
