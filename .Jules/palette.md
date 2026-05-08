@@ -1,0 +1,3 @@
+## 2026-05-08 - Accessible Dropdowns using useId
+**Learning:** React 18+'s `useId` hook is a perfect tool for implementing reliable, accessible relationships (`aria-controls`) in custom dropdown components. It provides stable IDs without the risk of collisions, which is vital when multiple instances of the same generic UI component (like `FilterDropdown`) are present on a page. Adding `aria-expanded` and conditionally rendering `aria-controls` only when open guarantees screen readers correctly understand the dropdown's state and context.
+**Action:** Next time you review or refactor a custom interactive component that reveals content, ensure you link the trigger and the content via generated IDs (`useId`) using `aria-controls`, and manage state using `aria-expanded`.
