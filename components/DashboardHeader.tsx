@@ -183,15 +183,15 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
                         <FilterDropdown label={t('ganttFilters.operator')} options={allOperators} selected={filters.operator || []} onToggle={(option) => onFilterChange('operator', option)} />
                         
                         <div className="flex items-center bg-slate-100 dark:bg-slate-950 rounded-full px-3 py-1 border border-slate-200 dark:border-slate-800/50 transition-colors">
-                            <button onClick={onZoomOut} className="p-1 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors duration-300" title="Zoom Out">
+                            <button onClick={onZoomOut} className="p-1 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors duration-300" title="Zoom Out" aria-label="Zoom Out">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" /></svg>
                             </button>
                             <div className="w-px h-3 bg-slate-200 dark:bg-slate-800 mx-2"></div>
-                            <button onClick={onFitWeek} className="text-[9px] font-bold text-slate-600 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors duration-300 uppercase tracking-widest" title="Fit one week to screen">
+                            <button onClick={onFitWeek} className="text-[9px] font-bold text-slate-600 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors duration-300 uppercase tracking-widest" title="Fit one week to screen" aria-label="Fit one week to screen">
                                 FIT
                             </button>
                             <div className="w-px h-3 bg-slate-200 dark:bg-slate-800 mx-2"></div>
-                            <button onClick={onZoomIn} className="p-1 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors duration-300" title="Zoom In">
+                            <button onClick={onZoomIn} className="p-1 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors duration-300" title="Zoom In" aria-label="Zoom In">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" /></svg>
                             </button>
                         </div>
@@ -331,6 +331,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
                            onClick={() => onSetIsColumnMenuOpen(!isColumnMenuOpen)}
                            className="p-2 rounded-lg text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-700/60 hover:bg-slate-200 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-500 dark:focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-slate-800"
                            title={t('header.toggleColumns')}
+                           aria-label={t('header.toggleColumns')}
                        >
                            <ColumnsIcon />
                        </button>
@@ -371,6 +372,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
                         onClick={() => setIsLangMenuOpen(!isLangMenuOpen)}
                         className="p-2 rounded-lg text-[#04274e] dark:text-slate-400 bg-slate-100 dark:bg-slate-700/60 hover:bg-slate-200 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 dark:focus:ring-offset-slate-800"
                         title={t('language')}
+                        aria-label={t('language')}
                     >
                          <LanguageIcon />
                     </button>
@@ -385,6 +387,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
                     onClick={toggleTheme}
                     className="p-2 rounded-lg text-[#04274e] dark:text-slate-400 bg-slate-100 dark:bg-slate-700/60 hover:bg-slate-200 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 dark:focus:ring-offset-slate-800"
                     title={theme === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'}
+                    aria-label={theme === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'}
                 >
                      {theme === 'light' ? <MoonIcon /> : <SunIcon />}
                 </button>
@@ -392,6 +395,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
                     onClick={onOpenScheduleInfo}
                     className="p-2 rounded-lg text-[#04274e] dark:text-slate-400 bg-slate-100 dark:bg-slate-700/60 hover:bg-slate-200 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 dark:focus:ring-offset-slate-800"
                     title={t('header.scheduleInfo') || 'Schedule Info'}
+                    aria-label={t('header.scheduleInfo') || 'Schedule Info'}
                 >
                      <InfoIcon />
                 </button>
@@ -399,6 +403,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
                     onClick={() => window.print()}
                     className="p-2 rounded-lg text-[#04274e] dark:text-slate-400 bg-slate-100 dark:bg-slate-700/60 hover:bg-slate-200 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 dark:focus:ring-offset-slate-800"
                     title={t('header.printSchedule')}
+                    aria-label={t('header.printSchedule')}
                 >
                      <PrintIcon />
                 </button>
@@ -406,6 +411,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
                     onClick={onManualSave}
                     className="p-2 rounded-lg text-[#04274e] dark:text-slate-400 bg-slate-100 dark:bg-slate-700/60 hover:bg-slate-200 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 dark:focus:ring-offset-slate-800"
                     title={t('actions.save')}
+                    aria-label={t('actions.save')}
                 >
                      <SaveIcon />
                 </button>
