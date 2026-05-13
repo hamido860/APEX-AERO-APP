@@ -1,0 +1,3 @@
+## 2024-05-13 - Add aria attributes for dropdown screen reader accessibility
+**Learning:** Custom dropdown components lacking standard HTML attributes like `aria-expanded` and `aria-controls` fail to properly communicate their expanded state and relationship to dropdown body content to screen readers. We shouldn't use `aria-haspopup="listbox"` unless valid child roles like `role="option"` exist.
+**Action:** Next time, when building or reviewing custom toggleable components like dropdowns, always ensure they generate unique IDs via `useId()` for `aria-controls` and explicitly specify the `aria-expanded` state.

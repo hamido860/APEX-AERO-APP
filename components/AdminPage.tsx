@@ -179,6 +179,7 @@ interface FiltersState { program: string[]; subProgram: string[]; showCriticalOn
 const FilterDropdown: React.FC<{ label: string; options: string[]; selected: string[]; onToggle: (option: string) => void; }> = ({ label, options, selected, onToggle }) => {
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = React.useRef<HTMLDivElement>(null);
+    const dropdownId = React.useId();
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -193,6 +194,8 @@ const FilterDropdown: React.FC<{ label: string; options: string[]; selected: str
         <div className="relative" ref={dropdownRef}>
             <button
                 onClick={() => setIsOpen(!isOpen)}
+                aria-expanded={isOpen}
+                aria-controls={isOpen ? dropdownId : undefined}
                 className={`flex items-center gap-2 px-3 py-1.5 text-sm font-semibold rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900 ${
                     isActive ? 'bg-cyan-600 dark:bg-cyan-500 text-white hover:bg-cyan-700 dark:hover:bg-cyan-600 focus:ring-cyan-500 dark:focus:ring-cyan-400' : 'bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-600 focus:ring-slate-400 dark:focus:ring-slate-500'
                 }`}
@@ -202,7 +205,7 @@ const FilterDropdown: React.FC<{ label: string; options: string[]; selected: str
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" /></svg>
             </button>
             {isOpen && (
-                <div className="absolute top-full left-0 mt-2 w-64 bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm border border-slate-200 dark:border-slate-700 rounded-lg shadow-2xl p-2 z-50 transition-colors duration-300">
+                <div id={dropdownId} className="absolute top-full left-0 mt-2 w-64 bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm border border-slate-200 dark:border-slate-700 rounded-lg shadow-2xl p-2 z-50 transition-colors duration-300">
                     <div className="max-h-60 overflow-y-auto pr-1">
                         {options.map(option => (
                             <label key={option} className="flex items-center gap-3 p-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700 cursor-pointer">
