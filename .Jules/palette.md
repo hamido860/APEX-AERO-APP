@@ -1,0 +1,1 @@
+## 2026-05-19 - FilterDropdown Accessibility\n**Learning:** Found that custom dropdowns (like FilterDropdown) lack basic ARIA attributes linking the button to the dropdown body.\n**Action:** Use `useId()` to generate unique IDs and apply `aria-controls` and `aria-expanded` to custom dropdown toggle buttons.
