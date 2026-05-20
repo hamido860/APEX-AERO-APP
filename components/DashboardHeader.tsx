@@ -183,7 +183,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
                         <FilterDropdown label={t('ganttFilters.operator')} options={allOperators} selected={filters.operator || []} onToggle={(option) => onFilterChange('operator', option)} />
                         
                         <div className="flex items-center bg-slate-100 dark:bg-slate-950 rounded-full px-3 py-1 border border-slate-200 dark:border-slate-800/50 transition-colors">
-                            <button onClick={onZoomOut} className="p-1 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors duration-300" title="Zoom Out">
+                            <button onClick={onZoomOut} aria-label="Zoom Out" className="p-1 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors duration-300" title="Zoom Out">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" /></svg>
                             </button>
                             <div className="w-px h-3 bg-slate-200 dark:bg-slate-800 mx-2"></div>
@@ -191,7 +191,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
                                 FIT
                             </button>
                             <div className="w-px h-3 bg-slate-200 dark:bg-slate-800 mx-2"></div>
-                            <button onClick={onZoomIn} className="p-1 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors duration-300" title="Zoom In">
+                            <button onClick={onZoomIn} aria-label="Zoom In" className="p-1 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors duration-300" title="Zoom In">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" /></svg>
                             </button>
                         </div>
