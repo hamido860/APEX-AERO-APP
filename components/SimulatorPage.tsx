@@ -3,6 +3,10 @@ import { Task, MasterTask, TaskStatus } from '../types';
 import { useLocalization } from '../contexts/LocalizationContext';
 import { GoogleGenAI, Type } from "@google/genai";
 import { useToast } from './Toast';
+import { AircraftTechnicalMap, ComputedZone } from './simulator/AircraftTechnicalMap';
+import { ZoneInspectorDrawer } from './simulator/ZoneInspectorDrawer';
+import { ProcessStatusLegend } from './simulator/ProcessStatusLegend';
+import { ProcessSummaryCards, SimulatorSummary } from './simulator/ProcessSummaryCards';
 
 interface SimulatorPageProps {
   onUpdateTasks: (tasks: Task[]) => void;
@@ -26,29 +30,122 @@ interface GeneratedOrder {
     }[];
 }
 
+const ZONE_DEFINITIONS = [
+  { id: "propeller", name: "Propeller / Engine Nose", keywords: ["engine", "propeller", "pt6", "cowling", "powerplant"] },
+  { id: "nose_section", name: "Nose Section", keywords: ["nose", "radome"] },
+  { id: "cockpit", name: "Cockpit", keywords: ["cockpit", "flight deck"] },
+  { id: "cabin", name: "Cabin", keywords: ["cabin", "fuselage", "passenger", "interior", "seats"] },
+  { id: "cargo_door", name: "Cargo Door Area", keywords: ["cargo", "door"] },
+  { id: "left_wing", name: "Left Wing", keywords: ["left wing", "port wing"] },
+  { id: "right_wing", name: "Right Wing", keywords: ["right wing", "starboard wing", "wing"] },
+  { id: "landing_gear", name: "Landing Gear", keywords: ["landing gear", "wheels", "struts", "brakes"] },
+  { id: "tail_cone", name: "Tail Cone", keywords: ["tail cone", "empennage"] },
+  { id: "vertical_stabilizer", name: "Vertical Stabilizer", keywords: ["vertical stabilizer", "vertical", "rudder"] },
+  { id: "horizontal_stabilizer", name: "Horizontal Stabilizer", keywords: ["horizontal stabilizer", "horizontal", "elevator"] },
+  { id: "electrical_systems", name: "Electrical / Avionics", keywords: ["electrical", "wiring", "harness", "power", "battery", "avionics", "instruments"] },
+  { id: "final_inspection", name: "Final Inspection", keywords: ["inspection", "final", "test flight", "qa", "quality"] }
+];
+
 const AILoadingState: React.FC<{ title: string }> = ({ title }) => (
     <div className="flex flex-col items-center justify-center h-full text-center">
-        <svg className="w-16 h-16 text-cyan-500 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <svg className="w-12 h-12 text-cyan-500 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
         </svg>
-        <h2 className="text-2xl font-bold text-white mt-6">{title}</h2>
+        <h2 className="text-xl font-bold text-slate-300 mt-4">{title}</h2>
     </div>
 );
 
 const SimulatorPage: React.FC<SimulatorPageProps> = ({ onUpdateTasks, allTasks, allOperators, masterTasks }) => {
     const { t } = useLocalization();
     const { addToast } = useToast();
+    
+    // AI Panel State
     const [isLoading, setIsLoading] = useState(false);
     const [lastGeneratedOrder, setLastGeneratedOrder] = useState<GeneratedOrder | null>(null);
     const [error, setError] = useState<string | null>(null);
+    
+    // Process Simulator State
+    const [selectedZoneId, setSelectedZoneId] = useState<string | null>(null);
+
+    // Compute Zones
+    const computedZones: ComputedZone[] = useMemo(() => {
+        return ZONE_DEFINITIONS.map(def => {
+            // Find tasks matching keywords
+            const matchedTasks = allTasks.filter(task => {
+                const searchString = `${task.name} ${task.description || ''} ${task.orderId} ${task.shortName}`.toLowerCase();
+                // Match if any keyword is in the search string. 
+                // Special case for 'wing' -> avoid matching 'left wing' if 'right wing'
+                // For simplicity, just check direct string inclusions
+                return def.keywords.some(kw => searchString.includes(kw));
+            });
+
+            // Calculate status
+            let status: ComputedZone['status'] = 'not_started';
+            let progress = 0;
+
+            if (matchedTasks.length > 0) {
+                const hasOnHold = matchedTasks.some(t => t.status === TaskStatus.OnHold);
+                const hasInProgress = matchedTasks.some(t => t.status === TaskStatus.InProgress);
+                const allCompleted = matchedTasks.every(t => t.status === TaskStatus.Completed || t.status === TaskStatus.QualityOK);
+                
+                if (hasOnHold) status = 'on_hold';
+                else if (hasInProgress) status = 'in_progress';
+                else if (allCompleted) status = 'completed';
+                
+                const totalProgress = matchedTasks.reduce((sum, t) => sum + t.progress, 0);
+                progress = Math.round(totalProgress / matchedTasks.length);
+            }
+
+            return {
+                id: def.id,
+                name: def.name,
+                status,
+                progress,
+                taskCount: matchedTasks.length
+            };
+        });
+    }, [allTasks]);
+
+    const activeZoneTasks = useMemo(() => {
+        if (!selectedZoneId) return [];
+        const def = ZONE_DEFINITIONS.find(d => d.id === selectedZoneId);
+        if (!def) return [];
+        
+        return allTasks.filter(task => {
+            const searchString = `${task.name} ${task.description || ''} ${task.orderId} ${task.shortName}`.toLowerCase();
+            return def.keywords.some(kw => searchString.includes(kw));
+        });
+    }, [selectedZoneId, allTasks]);
+
+    const activeZone = useMemo(() => {
+        return computedZones.find(z => z.id === selectedZoneId) || null;
+    }, [selectedZoneId, computedZones]);
+
+    const summary: SimulatorSummary = useMemo(() => {
+        const result = { completed: 0, inProgress: 0, onHold: 0, blocked: 0, notStarted: 0, overallProgress: 0 };
+        if (computedZones.length === 0) return result;
+        
+        let totalProgress = 0;
+        computedZones.forEach(z => {
+            if (z.status === 'completed') result.completed++;
+            else if (z.status === 'in_progress') result.inProgress++;
+            else if (z.status === 'on_hold') result.onHold++;
+            else if (z.status === 'blocked') result.blocked++;
+            else result.notStarted++;
+            totalProgress += z.progress;
+        });
+
+        result.overallProgress = Math.round(totalProgress / computedZones.length);
+        return result;
+    }, [computedZones]);
 
     const handleGenerateOrder = async () => {
         setIsLoading(true);
         setError(null);
 
         try {
-            const ai = new GoogleGenAI({apiKey: process.env.API_KEY});
+            const ai = new GoogleGenAI({apiKey: process.env.GEMINI_API_KEY});
 
             const operatorWorkloads = allOperators.map(op => ({
                 name: op,
@@ -113,7 +210,7 @@ const SimulatorPage: React.FC<SimulatorPageProps> = ({ onUpdateTasks, allTasks, 
 - The output must be a valid JSON object matching the provided schema, with no additional text or markdown.`;
 
             const response = await ai.models.generateContent({
-                model: 'gemini-2.5-flash',
+                model: 'gemini-3.1-pro-preview',
                 contents: JSON.stringify(promptContext),
                 config: { systemInstruction, responseMimeType: "application/json", responseSchema: schema },
             });
@@ -170,85 +267,113 @@ const SimulatorPage: React.FC<SimulatorPageProps> = ({ onUpdateTasks, allTasks, 
 
     const renderPriority = (priority: string) => {
         const p = priority.toLowerCase();
-        let colorClass = "bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 transition-colors duration-300";
-        if (p === 'high') colorClass = "bg-amber-500 text-white";
-        if (p === 'rush') colorClass = "bg-red-600 text-white";
-        return <span className={`px-3 py-1 text-xs font-bold rounded-full whitespace-nowrap ${colorClass}`}>{t(`simulator.priorityLevel.${p}`)}</span>
+        let colorClass = "bg-slate-700 text-slate-200";
+        if (p === 'high') colorClass = "bg-amber-500/20 text-amber-400 border border-amber-500/30";
+        if (p === 'rush') colorClass = "bg-red-500/20 text-red-400 border border-red-500/30";
+        return <span className={`px-2 py-0.5 text-[10px] uppercase tracking-widest font-bold rounded ${colorClass}`}>{t(`simulator.priorityLevel.${p}`)}</span>
     }
 
     return (
-        <div className="w-full h-full bg-white dark:bg-slate-800 rounded-2xl shadow-2xl p-6 flex flex-col transition-colors duration-300">
-            <header className="pb-4 border-b border-slate-700 mb-6 flex-shrink-0">
-                <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100 transition-colors duration-300">{t('simulator.title')}</h2>
-                <p className="text-sm text-slate-600 dark:text-slate-400 mt-1 transition-colors duration-300">{t('simulator.description')}</p>
+        <div className="w-full h-full bg-slate-900 rounded-2xl shadow-2xl flex flex-col font-sans overflow-hidden">
+            
+            <header className="p-6 border-b border-slate-800 flex-shrink-0 bg-slate-950 flex flex-col gap-6">
+                <div className="flex justify-between items-end">
+                    <div>
+                        <h2 className="text-2xl font-bold text-white tracking-tight leading-none mb-1">Process Simulator</h2>
+                        <p className="text-sm font-medium text-cyan-500 tracking-wider uppercase">Interactive Production Board</p>
+                    </div>
+                </div>
+                <ProcessSummaryCards summary={summary} />
             </header>
 
-            <div className="flex-grow grid grid-cols-1 md:grid-cols-2 gap-8">
-                {/* Control Panel */}
-                <div className="bg-slate-50 dark:bg-slate-900/50 p-6 rounded-lg flex flex-col items-center justify-center text-center transition-colors">
-                    {masterTasks.length > 0 ? (
-                        <button
-                            onClick={handleGenerateOrder}
-                            disabled={isLoading}
-                            className="flex items-center gap-3 px-6 py-3 text-base font-semibold rounded-lg transition-all bg-cyan-500 hover:bg-cyan-600 text-white shadow-lg hover:shadow-cyan-500/30 disabled:bg-slate-600 disabled:cursor-not-allowed disabled:shadow-none"
-                        >
-                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM18 15.75l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 18l-1.035.259a3.375 3.375 0 00-2.456 2.456L18 21.75l-.259-1.035a3.375 3.375 0 00-2.456-2.456L14.25 18l1.035-.259a3.375 3.375 0 002.456-2.456z" /></svg>
-                            {t('simulator.runButton')}
-                        </button>
-                    ) : (
-                        <p className="text-amber-400">{t('simulator.noMasterTasks')}</p>
-                    )}
+            <div className="flex-1 overflow-y-auto p-6 md:p-8 custom-scrollbar">
+                
+                {/* Visual Aircraft Map */}
+                <div className="w-full max-w-6xl mx-auto flex flex-col items-center">
+                    <AircraftTechnicalMap 
+                        zones={computedZones} 
+                        selectedZoneId={selectedZoneId} 
+                        onSelectZone={setSelectedZoneId} 
+                    />
+                    <div className="mt-8">
+                        <ProcessStatusLegend />
+                    </div>
                 </div>
 
-                {/* Results Panel */}
-                <div className="bg-slate-50 dark:bg-slate-900/50 p-6 rounded-lg transition-colors">
-                    {isLoading ? (
-                        <AILoadingState title={t('simulator.loadingTitle')} />
-                    ) : error ? (
-                        <div className="flex flex-col items-center justify-center h-full text-center">
-                            <div className="bg-red-900/50 border border-red-700 text-red-300 p-6 rounded-lg max-w-lg">
-                                <h3 className="text-lg font-semibold text-white mb-2">{t('simulator.error.title')}</h3>
-                                <p className="text-sm text-center">{t('simulator.error.apiError', error)}</p>
-                            </div>
+                {/* AI Stress Test Panel */}
+                <div className="mt-16 w-full max-w-6xl mx-auto border-t border-slate-800 pt-8">
+                    <h3 className="text-lg font-bold text-slate-300 uppercase tracking-widest mb-6">AI Stress Test</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        {/* Control Panel */}
+                        <div className="bg-slate-950 p-6 rounded-xl border border-slate-800 flex flex-col items-center justify-center text-center">
+                            {masterTasks.length > 0 ? (
+                                <button
+                                    onClick={handleGenerateOrder}
+                                    disabled={isLoading}
+                                    className="flex items-center gap-3 px-6 py-4 text-sm uppercase tracking-widest font-bold rounded-lg transition-all bg-cyan-600 hover:bg-cyan-500 text-white shadow-lg disabled:bg-slate-800 disabled:text-slate-500 disabled:cursor-not-allowed"
+                                >
+                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5"><path strokeLinecap="round" strokeLinejoin="round" d="M14.25 9.75L16.5 12l-2.25 2.25m-4.5 0L7.5 12l2.25-2.25M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z" /></svg>
+                                    Inject Work Order
+                                </button>
+                            ) : (
+                                <p className="text-amber-400 font-medium">No master tasks available.</p>
+                            )}
+                            <p className="text-xs text-slate-500 mt-4 leading-relaxed">Generates a smart, context-aware work order using Google Gemini based on the current workload of your factory.</p>
                         </div>
-                    ) : lastGeneratedOrder ? (
-                        <div className="flex flex-col gap-4">
-                            <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100 transition-colors duration-300">{t('simulator.lastGenerated')}</h3>
-                            <div className="bg-slate-100 dark:bg-slate-800 p-4 rounded-lg space-y-3 transition-colors duration-300">
-                                <div className="flex justify-between items-start">
-                                    <div>
-                                        <div className="text-xs text-slate-600 dark:text-slate-400 transition-colors duration-300">{t('simulator.orderId')} / {t('simulator.productName')}</div>
-                                        <div className="font-semibold text-slate-900 dark:text-white transition-colors duration-300">{lastGeneratedOrder.orderId} - {lastGeneratedOrder.productName}</div>
-                                    </div>
-                                    <div>
-                                         <div className="text-xs text-slate-600 dark:text-slate-400 text-right mb-1 transition-colors duration-300">{t('simulator.priority')}</div>
-                                         {renderPriority(lastGeneratedOrder.priority)}
+
+                        {/* Results Panel */}
+                        <div className="bg-slate-950 p-6 rounded-xl border border-slate-800">
+                            {isLoading ? (
+                                <AILoadingState title="Generating Order..." />
+                            ) : error ? (
+                                <div className="flex flex-col items-center justify-center p-4">
+                                        <h3 className="text-sm font-bold text-red-400 uppercase tracking-widest mb-2">Error</h3>
+                                        <p className="text-xs text-center text-slate-400">{error}</p>
+                                </div>
+                            ) : lastGeneratedOrder ? (
+                                <div className="flex flex-col gap-4">
+                                    <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest">Last Injected Order</h3>
+                                    <div className="bg-slate-900 border border-slate-800 p-4 rounded-lg">
+                                        <div className="flex justify-between items-start mb-4">
+                                            <div>
+                                                <div className="text-[10px] text-cyan-500 uppercase tracking-widest mb-1">{lastGeneratedOrder.orderId}</div>
+                                                <div className="font-bold text-slate-200">{lastGeneratedOrder.productName}</div>
+                                            </div>
+                                            {renderPriority(lastGeneratedOrder.priority)}
+                                        </div>
+                                        <div className="space-y-2 max-h-48 overflow-y-auto custom-scrollbar pr-2">
+                                            {lastGeneratedOrder.tasks.map(task => (
+                                                <div key={task.taskName} className="bg-slate-800 p-3 rounded flex justify-between items-start">
+                                                    <div>
+                                                        <p className="text-sm font-bold text-slate-300">{task.taskName}</p>
+                                                        <p className="text-[10px] text-slate-500 mt-1">{task.description}</p>
+                                                    </div>
+                                                    {task.isCritical && <span className="text-[9px] font-bold text-amber-500 border border-amber-500/30 bg-amber-500/10 px-1.5 py-0.5 rounded uppercase uppercase tracking-widest">Critical</span>}
+                                                </div>
+                                            ))}
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div>
-                                <h4 className="font-semibold text-slate-600 dark:text-slate-300 mb-2 transition-colors duration-300">{t('simulator.tasks', lastGeneratedOrder.tasks.length)}</h4>
-                                <ul className="space-y-2 max-h-60 overflow-y-auto pr-2 -mr-2">
-                                    {lastGeneratedOrder.tasks.map(task => (
-                                        <li key={task.taskName} className="bg-slate-100 dark:bg-slate-800 p-3 rounded-md flex justify-between items-center transition-colors duration-300">
-                                            <div>
-                                                <p className="font-medium text-slate-900 dark:text-slate-100 transition-colors duration-300">{task.taskName}</p>
-                                                <p className="text-xs text-slate-600 dark:text-slate-400 transition-colors duration-300">"{task.description}"</p>
-                                            </div>
-                                            {task.isCritical && <span className="text-xs font-bold text-orange-400 bg-orange-500/20 px-2 py-1 rounded-full">{t('simulator.critical')}</span>}
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
+                            ) : (
+                                <div className="flex flex-col items-center justify-center h-full text-slate-600">
+                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1} stroke="currentColor" className="w-12 h-12 mb-3"><path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                     <p className="text-sm font-semibold">Waiting for orders...</p>
+                                </div>
+                            )}
                         </div>
-                    ) : (
-                        <div className="flex flex-col items-center justify-center h-full text-center text-slate-500">
-                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1} stroke="currentColor" className="w-16 h-16"><path strokeLinecap="round" strokeLinejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" /></svg>
-                             <p className="mt-4 font-semibold">{t('simulator.noOrderGenerated')}</p>
-                        </div>
-                    )}
+                    </div>
                 </div>
+
             </div>
+
+            <ZoneInspectorDrawer 
+                zone={activeZone}
+                isOpen={!!selectedZoneId}
+                onClose={() => setSelectedZoneId(null)}
+                relatedTasks={activeZoneTasks}
+                onUpdateTasks={onUpdateTasks}
+                allTasks={allTasks}
+            />
         </div>
     );
 };

@@ -143,7 +143,7 @@ const AIAgentPage: React.FC<AIAgentPageProps> = ({ allTasks, masterTasks, onUpda
     const [uploadedFile, setUploadedFile] = useState<any[] | null>(null);
 
     const addMessage = (type: ChatMessage['type'], content: ChatMessage['content']) => {
-        setChatMessages(prev => [...prev, { id: Date.now(), type, content }]);
+        setChatMessages(prev => [...prev, { id: Date.now() + Math.random(), type, content }]);
     };
 
     useEffect(() => {

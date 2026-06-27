@@ -12,6 +12,7 @@
     "planner": "Planner",
     "aiPlanner": "AI Planner",
     "aiAgent": "AI Agent",
+    "processSimulator": "Process Simulator",
     "simulator": "Simulator",
     "orderDatabase": "Orders",
     "versatilityGrid": "Versatility",

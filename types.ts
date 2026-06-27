@@ -1,22 +1,17 @@
-
-
-
-
-
 export enum TaskStatus {
-  ToDo = 'To Do',
-  InProgress = 'In Progress',
-  Completed = 'Completed',
-  OnHold = 'On Hold',
-  QualityOK = 'Quality OK',
+  ToDo = "To Do",
+  InProgress = "In Progress",
+  Completed = "Completed",
+  OnHold = "On Hold",
+  QualityOK = "Quality OK",
 }
 
 export enum Rank {
-  Master = 'Master',
-  Senior = 'Senior',
-  Junior = 'Junior',
-  Trainee = 'Trainee',
-  Unranked = 'Unranked',
+  Master = "Master",
+  Senior = "Senior",
+  Junior = "Junior",
+  Trainee = "Trainee",
+  Unranked = "Unranked",
 }
 
 export interface RankSettings {
@@ -27,11 +22,11 @@ export interface RankSettings {
 }
 
 export const getRank = (count: number, settings: RankSettings): Rank => {
-    if (count >= settings.master) return Rank.Master;
-    if (count >= settings.senior) return Rank.Senior;
-    if (count >= settings.junior) return Rank.Junior;
-    if (count > 0) return Rank.Trainee; // Trainee is always 1 or more
-    return Rank.Unranked;
+  if (count >= settings.master) return Rank.Master;
+  if (count >= settings.senior) return Rank.Senior;
+  if (count >= settings.junior) return Rank.Junior;
+  if (count > 0) return Rank.Trainee; // Trainee is always 1 or more
+  return Rank.Unranked;
 };
 
 export interface Task {
@@ -64,6 +59,40 @@ export interface MasterTask {
 
 export type ProficiencyOverrides = {
   [operatorName: string]: {
-    [taskName:string]: number;
+    [taskName: string]: number;
   };
+};
+
+export type ProcessMapPart = {
+  id: string;
+  productCode: string; // PC-12, A320, custom product, etc.
+  view: "top" | "side" | "both";
+
+  key: string;
+  name: string;
+  description?: string;
+
+  shapeType: "rect" | "ellipse" | "polygon" | "path";
+  shapeData: {
+    x?: number;
+    y?: number;
+    width?: number;
+    height?: number;
+    points?: number[];
+    path?: string;
+    rotation?: number;
+  };
+
+  visible: boolean;
+  locked: boolean;
+
+  taskKeywords: string[];
+  workshopId?: string;
+  team?: string;
+
+  colorMode: "status" | "manual";
+  manualColor?: string;
+
+  createdAt: string;
+  updatedAt: string;
 };
