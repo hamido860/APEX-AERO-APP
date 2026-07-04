@@ -330,6 +330,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
                            onClick={() => onSetIsColumnMenuOpen(!isColumnMenuOpen)}
                            className="p-2 rounded-lg text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-700/60 hover:bg-slate-200 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-500 dark:focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-slate-800"
                            title={t('header.toggleColumns')}
+                           aria-label={t('header.toggleColumns')}
                        >
                            <ColumnsIcon />
                        </button>
@@ -370,6 +371,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
                         onClick={() => setIsLangMenuOpen(!isLangMenuOpen)}
                         className="p-2 rounded-lg text-[#04274e] dark:text-slate-400 bg-slate-100 dark:bg-slate-700/60 hover:bg-slate-200 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 dark:focus:ring-offset-slate-800"
                         title={t('language')}
+                        aria-label={t('language')}
                     >
                          <LanguageIcon />
                     </button>
@@ -384,6 +386,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
                     onClick={toggleTheme}
                     className="p-2 rounded-lg text-[#04274e] dark:text-slate-400 bg-slate-100 dark:bg-slate-700/60 hover:bg-slate-200 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 dark:focus:ring-offset-slate-800"
                     title={theme === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'}
+                    aria-label={theme === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'}
                 >
                      {theme === 'light' ? <MoonIcon /> : <SunIcon />}
                 </button>
@@ -391,6 +394,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
                     onClick={onOpenScheduleInfo}
                     className="p-2 rounded-lg text-[#04274e] dark:text-slate-400 bg-slate-100 dark:bg-slate-700/60 hover:bg-slate-200 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 dark:focus:ring-offset-slate-800"
                     title={t('header.scheduleInfo') || 'Schedule Info'}
+                    aria-label={t('header.scheduleInfo') || 'Schedule Info'}
                 >
                      <InfoIcon />
                 </button>
@@ -398,6 +402,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
                     onClick={() => window.print()}
                     className="p-2 rounded-lg text-[#04274e] dark:text-slate-400 bg-slate-100 dark:bg-slate-700/60 hover:bg-slate-200 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 dark:focus:ring-offset-slate-800"
                     title={t('header.printSchedule')}
+                    aria-label={t('header.printSchedule')}
                 >
                      <PrintIcon />
                 </button>
@@ -405,6 +410,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
                     onClick={onManualSave}
                     className="p-2 rounded-lg text-[#04274e] dark:text-slate-400 bg-slate-100 dark:bg-slate-700/60 hover:bg-slate-200 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 dark:focus:ring-offset-slate-800"
                     title={t('actions.save')}
+                    aria-label={t('actions.save')}
                 >
                      <SaveIcon />
                 </button>
