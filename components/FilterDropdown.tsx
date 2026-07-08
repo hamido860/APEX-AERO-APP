@@ -12,7 +12,24 @@ interface FilterDropdownProps {
 export const FilterDropdown: React.FC<FilterDropdownProps> = ({ label, options, selected, onToggle, getLabel }) => {
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
+    const buttonRef = useRef<HTMLButtonElement>(null);
     const dropdownId = useId();
+
+    useEffect(() => {
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key === 'Escape' && isOpen) {
+                setIsOpen(false);
+                buttonRef.current?.focus();
+            }
+        };
+
+        if (isOpen) {
+            document.addEventListener('keydown', handleKeyDown);
+        }
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [isOpen]);
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -28,6 +45,7 @@ export const FilterDropdown: React.FC<FilterDropdownProps> = ({ label, options, 
     return (
         <div className="relative" ref={dropdownRef}>
             <button
+                ref={buttonRef}
                 aria-expanded={isOpen}
                 aria-controls={isOpen ? dropdownId : undefined}
                 onClick={() => setIsOpen(!isOpen)}
