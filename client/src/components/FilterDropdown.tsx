@@ -1,5 +1,5 @@
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useId } from 'react';
 
 interface FilterDropdownProps {
     label: string;
@@ -13,6 +13,19 @@ interface FilterDropdownProps {
 export const FilterDropdown: React.FC<FilterDropdownProps> = ({ label, options, selected, onToggle, getLabel, icon }) => {
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
+    const buttonRef = useRef<HTMLButtonElement>(null);
+    const dropdownId = useId();
+
+    useEffect(() => {
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key === 'Escape' && isOpen) {
+                setIsOpen(false);
+                buttonRef.current?.focus();
+            }
+        };
+        document.addEventListener('keydown', handleKeyDown);
+        return () => document.removeEventListener('keydown', handleKeyDown);
+    }, [isOpen]);
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -28,8 +41,12 @@ export const FilterDropdown: React.FC<FilterDropdownProps> = ({ label, options, 
     return (
         <div className="relative group/filter" ref={dropdownRef}>
             <button
+                ref={buttonRef}
                 onClick={() => setIsOpen(!isOpen)}
-                className={`flex items-center justify-center w-8 h-8 rounded-lg transition-all duration-200 relative ${
+                aria-expanded={isOpen}
+                aria-controls={isOpen ? dropdownId : undefined}
+                aria-label={`Filter by ${label}`}
+                className={`flex items-center justify-center w-8 h-8 rounded-lg transition-all duration-200 relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 ${
                     isActive 
                         ? 'text-cyan-500 dark:text-cyan-400 hover:text-cyan-600 dark:hover:text-cyan-300' 
                         : 'text-slate-400 dark:text-slate-400 hover:text-slate-700 dark:hover:text-white'
@@ -52,12 +69,12 @@ export const FilterDropdown: React.FC<FilterDropdownProps> = ({ label, options, 
                 <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-slate-900 dark:bg-slate-700 rotate-45"></div>
             </div>
             {isOpen && (
-                <div className="absolute top-full left-0 mt-2 w-64 bg-white dark:bg-slate-800/90 backdrop-blur-sm border border-slate-200 dark:border-slate-700 rounded-lg shadow-2xl p-2 z-50">
+                <div id={dropdownId} className="absolute top-full left-0 mt-2 w-64 bg-white dark:bg-slate-800/90 backdrop-blur-sm border border-slate-200 dark:border-slate-700 rounded-lg shadow-2xl p-2 z-50">
                     <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider px-2 py-1 mb-1">{label}</p>
                     <div className="max-h-60 overflow-y-auto pr-1">
                         {options.map(option => (
                             <label key={option} className="flex items-center gap-3 p-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700 cursor-pointer">
-                                <input type="checkbox" className="h-4 w-4 rounded bg-slate-200 dark:bg-slate-600 border-slate-300 dark:border-slate-500 text-cyan-600 dark:text-cyan-500 focus:ring-cyan-500" checked={selected.includes(option)} onChange={() => onToggle(option)} />
+                                <input type="checkbox" className="h-4 w-4 rounded bg-slate-200 dark:bg-slate-600 border-slate-300 dark:border-slate-500 text-cyan-600 dark:text-cyan-500 focus:ring-cyan-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500" checked={selected.includes(option)} onChange={() => onToggle(option)} />
                                 <span className="text-sm text-slate-700 dark:text-slate-200">{getLabel ? getLabel(option) : option}</span>
                             </label>
                         ))}

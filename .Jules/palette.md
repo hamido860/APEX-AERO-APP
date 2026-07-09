@@ -1,0 +1,3 @@
+## 2024-07-09 - Added Keyboard Navigation to FilterDropdown
+**Learning:** `pnpm format` formats the entire repository, leading to massive unintended diffs that make code reviews difficult and cause merge conflicts. When aiming to make micro-UX improvements under 50 lines, avoid running full repository formatters. Also, `aria-expanded`, `aria-controls`, and `aria-label` are critical for custom dropdown menus, along with an `Escape` key listener to close the dropdown and return focus to the trigger button for better accessibility.
+**Action:** Do not run repository-wide formatting commands blindly when making isolated changes. Always ensure only the intended files/lines are modified and committed.
