@@ -681,10 +681,9 @@ const GanttChart: React.FC<GanttChartProps> = ({ tasks, allTasks, allOperators, 
                 <div className="flex flex-shrink-0 bg-white dark:bg-slate-900">
                     {visibleColumns.map((col) => (
                         <div key={col.id} title={col.label} className={`group relative font-bold text-[9px] uppercase tracking-widest p-2 flex flex-col items-center justify-center text-center border-b border-r border-slate-200 dark:border-slate-800/50 header-cell transition-colors ${activeColumns.includes(col.id) ? 'bg-cyan-100 dark:bg-cyan-900/30 text-cyan-700 dark:text-cyan-400' : 'bg-slate-50 dark:bg-slate-900 text-slate-500 dark:text-slate-500'}`} style={{width: columnWidths[col.id], height: HEADER_HEIGHT}}>
-                            <div className="flex items-center gap-1 opacity-50 group-hover:opacity-100 transition-opacity">
+                            <div className="flex items-center justify-center opacity-60 group-hover:opacity-100 transition-opacity" title={col.label}>
                                 {col.icon}
                             </div>
-                            <span className="transition-colors group-hover:text-cyan-600 dark:group-hover:text-cyan-400 text-[8px]">{col.label}</span>
                             <ColumnFilter columnId={col.id} filters={filters} onFilterChange={onFilterChange} />
                             <div
                                 onMouseDown={(e) => handleColumnResizeStart(e, col.id)}
