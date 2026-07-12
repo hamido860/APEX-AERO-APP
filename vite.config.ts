@@ -5,6 +5,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { defineConfig, type Plugin, type ViteDevServer } from "vite";
 import { vitePluginManusRuntime } from "vite-plugin-manus-runtime";
+import { vercelToolbar } from "@vercel/toolbar/plugins/vite";
 
 // =============================================================================
 // Manus Debug Collector - Vite Plugin
@@ -180,14 +181,14 @@ function vitePluginStorageProxy(): Plugin {
           });
 
           if (!forgeResp.ok) {
-            res.writeHead(502, { "Content-Type": "text/plain" });
+            res.writeHead(520, { "Content-Type": "text/plain" });
             res.end("Storage backend error");
             return;
           }
 
           const { url } = (await forgeResp.json()) as { url: string };
           if (!url) {
-            res.writeHead(502, { "Content-Type": "text/plain" });
+            res.writeHead(520, { "Content-Type": "text/plain" });
             res.end("Empty signed URL");
             return;
           }
@@ -195,7 +196,7 @@ function vitePluginStorageProxy(): Plugin {
           res.writeHead(307, { Location: url, "Cache-Control": "no-store" });
           res.end();
         } catch {
-          res.writeHead(502, { "Content-Type": "text/plain" });
+          res.writeHead(520, { "Content-Type": "text/plain" });
           res.end("Storage proxy error");
         }
       });
@@ -203,7 +204,15 @@ function vitePluginStorageProxy(): Plugin {
   };
 }
 
-const plugins = [react(), tailwindcss(), jsxLocPlugin(), vitePluginManusRuntime(), vitePluginManusDebugCollector(), vitePluginStorageProxy()];
+const plugins = [
+  react(),
+  tailwindcss(),
+  jsxLocPlugin(),
+  vitePluginManusRuntime(),
+  vitePluginManusDebugCollector(),
+  vitePluginStorageProxy(),
+  vercelToolbar()
+];
 
 export default defineConfig({
   plugins,
