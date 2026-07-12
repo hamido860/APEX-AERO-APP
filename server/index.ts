@@ -9,24 +9,38 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const server = createServer(app);
 
+// Use process.cwd() for more robust path resolution in serverless environments
+const rootDir = process.cwd();
+
 // Serve static files
-// Note: In Vercel, we typically let the platform serve static files,
-// but we keep this for local dev and fallback.
+// In Vercel, static files are usually served via rewrites,
+// but we keep this for local dev and as a fallback.
 const staticPath =
   process.env.NODE_ENV === "production"
-    ? path.resolve(__dirname, "public")
+    ? path.join(rootDir, "dist", "public")
     : path.resolve(__dirname, "..", "dist", "public");
 
 app.use(express.static(staticPath));
 
 // Add a test API route to verify the server is working
 app.get("/api/health", (_req, res) => {
-  res.json({ status: "ok", message: "Server is running" });
+  res.json({ status: "ok", message: "Server is running", env: process.env.NODE_ENV });
 });
 
 // Handle client-side routing
-app.get("*", (_req, res) => {
-  res.sendFile(path.join(staticPath, "index.html"));
+app.get("*", (req, res, next) => {
+  // If it's an API route that didn't match anything above, return 404
+  if (req.path.startsWith("/api/")) {
+    return res.status(404).json({ error: "Not Found" });
+  }
+
+  const indexPath = path.join(staticPath, "index.html");
+  res.sendFile(indexPath, (err) => {
+    if (err) {
+      console.error("Error sending index.html:", err);
+      res.status(500).send("Internal Server Error: Missing frontend build");
+    }
+  });
 });
 
 // Only listen if not running on Vercel
