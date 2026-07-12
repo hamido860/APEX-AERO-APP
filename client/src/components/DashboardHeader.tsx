@@ -360,7 +360,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
                     <button
                         onClick={() => setIsLangMenuOpen(!isLangMenuOpen)}
                         className="flex items-center justify-center w-8 h-8 rounded-lg text-slate-400 dark:text-slate-400 hover:text-slate-700 dark:hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 dark:focus-visible:ring-cyan-400"
-                        aria-label={t('language')}
+                        aria-label={t('language')} title={t('language')}
                     >
                          <LanguageIcon />
                     </button>
@@ -379,7 +379,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
                     <button
                         onClick={toggleTheme}
                         className="flex items-center justify-center w-8 h-8 rounded-lg text-slate-400 dark:text-slate-400 hover:text-slate-700 dark:hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 dark:focus-visible:ring-cyan-400"
-                        aria-label={theme === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'}
+                        aria-label={theme === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'} title={theme === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'}
                     >
                          {theme === 'light' ? <MoonIcon /> : <SunIcon />}
                     </button>
@@ -392,7 +392,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
                     <button
                         onClick={onOpenScheduleInfo}
                         className="flex items-center justify-center w-8 h-8 rounded-lg text-slate-400 dark:text-slate-400 hover:text-slate-700 dark:hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 dark:focus-visible:ring-cyan-400"
-                        aria-label={t('header.scheduleInfo') || 'Schedule Info'}
+                        aria-label={t('header.scheduleInfo') || 'Schedule Info'} title={t('header.scheduleInfo') || 'Schedule Info'}
                     >
                          <InfoIcon />
                     </button>
@@ -405,7 +405,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
                     <button
                         onClick={() => window.print()}
                         className="flex items-center justify-center w-8 h-8 rounded-lg text-slate-400 dark:text-slate-400 hover:text-slate-700 dark:hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 dark:focus-visible:ring-cyan-400"
-                        aria-label={t('header.printSchedule') || 'Print Schedule'}
+                        aria-label={t('header.printSchedule') || 'Print Schedule'} title={t('header.printSchedule') || 'Print Schedule'}
                     >
                          <PrintIcon />
                     </button>
@@ -418,7 +418,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
                     <button
                         onClick={onManualSave}
                         className="flex items-center justify-center w-8 h-8 rounded-lg text-slate-400 dark:text-slate-400 hover:text-slate-700 dark:hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 dark:focus-visible:ring-cyan-400"
-                        aria-label={t('actions.save') || 'Save'}
+                        aria-label={t('actions.save') || 'Save'} title={t('actions.save') || 'Save'}
                     >
                          <SaveIcon />
                     </button>

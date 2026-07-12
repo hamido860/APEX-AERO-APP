@@ -529,6 +529,7 @@ export const App = () => {
                     ? 'text-cyan-600 dark:text-cyan-400 bg-cyan-50 dark:bg-cyan-950/50' 
                     : 'text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800'
                 }`}
+                aria-label={item.label} title={item.label}
               >
                 {currentView === item.id && (
                   <div className="absolute bottom-0 left-2 right-2 h-0.5 bg-cyan-500 rounded-full"></div>
