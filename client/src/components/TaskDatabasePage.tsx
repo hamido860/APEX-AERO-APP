@@ -214,8 +214,8 @@ const TaskDatabasePage: React.FC<TaskDatabasePageProps> = ({ allTasks, masterTas
                                     {columnVisibility.defaultDuration && <td className="p-2"><input type="number" min="1" name="defaultDuration" value={editingTask.defaultDuration} onChange={handleInputChange} className={`${inputClass} text-center`} /></td>}
                                     {columnVisibility.actions && <td className="p-2">
                                         <div className="flex items-center gap-2">
-                                            <button onClick={handleSaveEdit} title={t('taskdatabase.actions.save')} className="p-2 rounded text-slate-200 bg-green-600 hover:bg-green-500 transition-colors"><SaveIcon /></button>
-                                            <button onClick={handleCancelEdit} title={t('taskdatabase.actions.cancel')} className="p-2 rounded text-slate-200 bg-slate-600 hover:bg-slate-500 transition-colors"><CancelIcon /></button>
+                                            <button onClick={handleSaveEdit} title={t('taskdatabase.actions.save')} aria-label={t('taskdatabase.actions.save')} className="p-2 rounded text-slate-200 bg-green-600 hover:bg-green-500 transition-colors focus-visible:ring-2 focus-visible:outline-none"><SaveIcon /></button>
+                                            <button onClick={handleCancelEdit} title={t('taskdatabase.actions.cancel')} aria-label={t('taskdatabase.actions.cancel')} className="p-2 rounded text-slate-200 bg-slate-600 hover:bg-slate-500 transition-colors focus-visible:ring-2 focus-visible:outline-none"><CancelIcon /></button>
                                         </div>
                                     </td>}
                                 </>
@@ -228,8 +228,8 @@ const TaskDatabasePage: React.FC<TaskDatabasePageProps> = ({ allTasks, masterTas
                                     {columnVisibility.defaultDuration && <td className="py-2 px-3 text-center">{t('taskdatabase.hours', task.defaultDuration)}</td>}
                                     {columnVisibility.actions && <td className="p-2">
                                         <div className="flex items-center gap-2">
-                                            <button onClick={() => handleEdit(task)} title={t('taskdatabase.actions.edit')} className="p-2 rounded text-slate-500 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white transition-colors"><EditIcon /></button>
-                                            <button onClick={() => handleDelete(task.name)} title={t('taskdatabase.actions.delete')} className="p-2 rounded text-slate-500 dark:text-slate-400 hover:bg-red-600/80 hover:text-white transition-colors"><DeleteIcon /></button>
+                                            <button onClick={() => handleEdit(task)} title={t('taskdatabase.actions.edit')} aria-label={t('taskdatabase.actions.edit')} className="p-2 rounded text-slate-500 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white transition-colors focus-visible:ring-2 focus-visible:outline-none"><EditIcon /></button>
+                                            <button onClick={() => handleDelete(task.name)} title={t('taskdatabase.actions.delete')} aria-label={t('taskdatabase.actions.delete')} className="p-2 rounded text-slate-500 dark:text-slate-400 hover:bg-red-600/80 hover:text-white transition-colors focus-visible:ring-2 focus-visible:outline-none"><DeleteIcon /></button>
                                         </div>
                                     </td>}
                                 </>

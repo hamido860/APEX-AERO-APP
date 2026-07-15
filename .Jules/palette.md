@@ -1,0 +1,3 @@
+## $(date +%Y-%m-%d) - Component Icon Button Accessibility Pattern
+**Learning:** Found a recurring pattern in the app's components (like TaskDatabasePage) where icon-only action buttons use `title` attributes for tooltips but lack semantic `aria-label`s for screen readers and visible focus rings for keyboard navigation.
+**Action:** When adding or updating icon-only buttons in this app, always double-bind localization strings to both `title` (for mouse hover tooltips) and `aria-label` (for screen readers), and explicitly include `focus-visible:ring-2 focus-visible:outline-none` classes to ensure they meet basic accessibility standards.
