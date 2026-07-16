@@ -1,3 +1,6 @@
 ## 2024-07-09 - Added Keyboard Navigation to FilterDropdown
 **Learning:** `pnpm format` formats the entire repository, leading to massive unintended diffs that make code reviews difficult and cause merge conflicts. When aiming to make micro-UX improvements under 50 lines, avoid running full repository formatters. Also, `aria-expanded`, `aria-controls`, and `aria-label` are critical for custom dropdown menus, along with an `Escape` key listener to close the dropdown and return focus to the trigger button for better accessibility.
 **Action:** Do not run repository-wide formatting commands blindly when making isolated changes. Always ensure only the intended files/lines are modified and committed.
+## $(date +%Y-%m-%d) - AddTaskModal Keyboard Accessibility & Screen Reader Improvements
+**Learning:** Adding explicit `role="dialog"`, `aria-modal="true"`, and linking a header `id` via `aria-labelledby` ensures screen readers announce custom React modals correctly upon opening. Furthermore, setting `autoFocus` on the primary input and wiring up the Escape key significantly streamlines data entry workflows, reducing the need for mouse clicks.
+**Action:** Always implement robust focus management (e.g. `autoFocus`), keyboard shortcuts (e.g. `Escape` to close), and ARIA landmark properties for any custom overlay dialog or modal in the application.
