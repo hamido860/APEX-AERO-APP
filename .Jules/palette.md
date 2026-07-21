@@ -1,3 +1,7 @@
 ## 2024-07-09 - Added Keyboard Navigation to FilterDropdown
 **Learning:** `pnpm format` formats the entire repository, leading to massive unintended diffs that make code reviews difficult and cause merge conflicts. When aiming to make micro-UX improvements under 50 lines, avoid running full repository formatters. Also, `aria-expanded`, `aria-controls`, and `aria-label` are critical for custom dropdown menus, along with an `Escape` key listener to close the dropdown and return focus to the trigger button for better accessibility.
 **Action:** Do not run repository-wide formatting commands blindly when making isolated changes. Always ensure only the intended files/lines are modified and committed.
+
+## 2026-07-21 - Adding Accessible State to Dropdown Buttons
+**Learning:** In React components featuring custom dropdown menus or toggle buttons (like those in DashboardHeader), simply adding an `aria-label` is insufficient for accessibility. Buttons that control the visibility of a container must use `aria-expanded` to convey their state, and `aria-controls` paired with a unique `id` (via `useId()`) to explicitly associate the button with the container it controls, allowing screen readers to accurately represent the relationship.
+**Action:** Always check interactive toggle buttons for these three properties (`aria-label`, `aria-expanded`, `aria-controls`) and link them to their corresponding containers.
