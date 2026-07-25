@@ -1,5 +1,5 @@
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { MasterTask, Task } from '@/types';
 import { useLocalization } from '@/contexts/LocalizationContext';
 import { AddTaskModal } from './AddTaskModal';
@@ -134,6 +134,19 @@ const TaskDatabasePage: React.FC<TaskDatabasePageProps> = ({ allTasks, masterTas
     
     // --- File Upload Handlers ---
     const closeUploadModal = () => { setIsUploadModalOpen(false); setUploadError(null); setTasksToUpload([]); };
+
+    useEffect(() => {
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key === 'Escape' && isUploadModalOpen) {
+                setIsUploadModalOpen(false);
+                setUploadError(null);
+                setTasksToUpload([]);
+            }
+        };
+        document.addEventListener('keydown', handleKeyDown);
+        return () => document.removeEventListener('keydown', handleKeyDown);
+    }, [isUploadModalOpen]);
+
     const getValueFromRow = (row: any, keys: string[]): any => {
         const rowKeys = Object.keys(row);
         for (const alias of keys) {
@@ -252,9 +265,15 @@ const TaskDatabasePage: React.FC<TaskDatabasePageProps> = ({ allTasks, masterTas
 
           {isUploadModalOpen && (
             <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 backdrop-blur-sm" onClick={closeUploadModal}>
-                <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl p-6 flex flex-col w-full max-w-4xl max-h-[90vh] border border-slate-200 dark:border-slate-700 transition-colors duration-300" onClick={e => e.stopPropagation()}>
+                <div
+                    className="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl p-6 flex flex-col w-full max-w-4xl max-h-[90vh] border border-slate-200 dark:border-slate-700 transition-colors duration-300"
+                    onClick={e => e.stopPropagation()}
+                    role="dialog"
+                    aria-modal="true"
+                    aria-labelledby="upload-modal-title"
+                >
                     <header className="flex-shrink-0 mb-4">
-                        <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 transition-colors duration-300">{t('taskdatabase.upload.title')}</h2>
+                        <h2 id="upload-modal-title" className="text-2xl font-bold text-slate-900 dark:text-slate-100 transition-colors duration-300">{t('taskdatabase.upload.title')}</h2>
                     </header>
                     {uploadError ? (
                         <div className="bg-red-900/50 border border-red-700 text-red-300 p-4 rounded-lg flex-grow flex flex-col items-center justify-center">
