@@ -101,7 +101,7 @@ const TaskDetailSidebar: React.FC<TaskDetailSidebarProps> = ({ task, allTasks, o
                      {operatorContext && onBackToOperator && (
                         <button
                             onClick={onBackToOperator}
-                            className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors p-1 rounded-full hover:bg-slate-200 dark:hover:bg-slate-700"
+                            className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors p-1 rounded-full hover:bg-slate-200 dark:hover:bg-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 dark:focus-visible:ring-cyan-400"
                             aria-label={t('details.backToOperator', operatorContext)}
                             title={t('details.backToOperator', operatorContext)}
                         >
@@ -117,8 +117,9 @@ const TaskDetailSidebar: React.FC<TaskDetailSidebarProps> = ({ task, allTasks, o
                 </div>
                 <button 
                     onClick={onClose} 
-                    className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors p-1 rounded-full hover:bg-slate-200 dark:hover:bg-slate-700"
+                    className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors p-1 rounded-full hover:bg-slate-200 dark:hover:bg-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 dark:focus-visible:ring-cyan-400"
                     aria-label={t('actions.close')}
+                    title={t('actions.close')}
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -211,7 +212,7 @@ const TaskDetailSidebar: React.FC<TaskDetailSidebarProps> = ({ task, allTasks, o
                         <div className="bg-slate-900/40 border border-slate-700/60 p-4 rounded-lg">
                             <div className="flex justify-between items-start mb-3">
                                 <h3 className="text-sm font-medium text-slate-600 dark:text-slate-400 flex items-center gap-2 transition-colors duration-300">{linkIcon} {t('details.dependencies')}</h3>
-                                <button onClick={() => setIsDependencyModalOpen(true)} className="text-xs font-semibold text-cyan-400 hover:text-cyan-300 transition-colors">{t('actions.edit')}</button>
+                                <button onClick={() => setIsDependencyModalOpen(true)} className="text-xs font-semibold text-cyan-400 hover:text-cyan-300 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 rounded">{t('actions.edit')}</button>
                             </div>
                             <div className="grid grid-cols-2 gap-x-4">
                                 <div>
@@ -252,7 +253,7 @@ const TaskDetailSidebar: React.FC<TaskDetailSidebarProps> = ({ task, allTasks, o
             </div>
              {prerequisites.length === 0 && dependents.length === 0 && (
                 <div className="flex-shrink-0 pt-4 mt-auto border-t border-slate-700">
-                    <button onClick={() => setIsDependencyModalOpen(true)} className="w-full text-center px-4 py-2 text-sm font-semibold rounded-lg transition-colors bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white">
+                    <button onClick={() => setIsDependencyModalOpen(true)} className="w-full text-center px-4 py-2 text-sm font-semibold rounded-lg transition-colors bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500">
                         {t('actions.manageDependencies')}
                     </button>
                 </div>

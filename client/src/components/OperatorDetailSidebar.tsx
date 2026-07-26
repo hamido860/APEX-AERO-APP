@@ -33,7 +33,7 @@ const OperatorTaskItem: React.FC<{ task: Task; onSelect: () => void }> = ({ task
     return (
         <button 
             onClick={onSelect} 
-            className="w-full text-left p-3 rounded-lg bg-slate-200/50 dark:bg-slate-700/50 hover:bg-slate-300 dark:hover:bg-slate-700 transition-all flex items-start gap-3"
+            className="w-full text-left p-3 rounded-lg bg-slate-200/50 dark:bg-slate-700/50 hover:bg-slate-300 dark:hover:bg-slate-700 transition-all flex items-start gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 dark:focus-visible:ring-cyan-400"
         >
             <div className={`w-1.5 h-1.5 mt-1.5 rounded-full flex-shrink-0 ${isOverdue ? 'bg-red-500' : 'bg-cyan-400'}`}></div>
             <div className="flex-1">
@@ -77,8 +77,9 @@ const OperatorDetailSidebar: React.FC<OperatorDetailSidebarProps> = ({ operatorN
                 </div>
                 <button 
                     onClick={onClose} 
-                    className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors p-1 rounded-full hover:bg-slate-200 dark:hover:bg-slate-700"
+                    className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors p-1 rounded-full hover:bg-slate-200 dark:hover:bg-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 dark:focus-visible:ring-cyan-400"
                     aria-label={t('actions.close')}
+                    title={t('actions.close')}
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
