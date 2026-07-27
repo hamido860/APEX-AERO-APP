@@ -95,8 +95,9 @@ const OperatorTimeline: React.FC<{
                     <p className="text-sm text-slate-600 dark:text-slate-400 transition-colors duration-300">{t('admin.workload', workload.toFixed(1))}</p>
                     <button 
                         onClick={(e) => { e.stopPropagation(); onAutoSchedule(); }}
-                        className="text-cyan-400 hover:text-cyan-300 hover:bg-cyan-900/30 p-1.5 rounded-md transition-colors"
+                        className="text-cyan-400 hover:text-cyan-300 hover:bg-cyan-900/30 p-1.5 rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
                         title="Auto-Schedule / Compact Tasks (No Overlap)"
+                        aria-label="Auto-Schedule / Compact Tasks (No Overlap)"
                     >
                         <SparklesIcon />
                     </button>
