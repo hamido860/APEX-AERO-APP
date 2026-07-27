@@ -13,6 +13,22 @@ const ScheduleInfoModal: React.FC<ScheduleInfoModalProps> = ({ isOpen, onClose }
     const [currentTime, setCurrentTime] = useState(new Date());
 
     useEffect(() => {
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key === 'Escape') {
+                onClose();
+            }
+        };
+
+        if (isOpen) {
+            document.addEventListener('keydown', handleKeyDown);
+        }
+
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [isOpen, onClose]);
+
+    useEffect(() => {
         const timer = setInterval(() => {
             setCurrentTime(new Date());
         }, 1000);
@@ -25,9 +41,12 @@ const ScheduleInfoModal: React.FC<ScheduleInfoModalProps> = ({ isOpen, onClose }
     const formattedDate = currentTime.toLocaleDateString([], { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
 
     return (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/20 dark:bg-slate-950/80 backdrop-blur-sm animate-in fade-in duration-300">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/20 dark:bg-slate-950/80 backdrop-blur-sm animate-in fade-in duration-300" onClick={onClose}>
             <div 
                 className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-2xl w-full max-w-lg overflow-hidden animate-in zoom-in-95 duration-300 transition-colors"
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="schedule-info-title"
                 onClick={(e) => e.stopPropagation()}
             >
                 {/* Header */}
@@ -37,13 +56,16 @@ const ScheduleInfoModal: React.FC<ScheduleInfoModalProps> = ({ isOpen, onClose }
                             <Clock className="w-6 h-6" />
                         </div>
                         <div>
-                            <h2 className="text-lg font-bold text-slate-900 dark:text-white tracking-tight uppercase transition-colors duration-300">{t('scheduleInfo.title') || 'Schedule Info'}</h2>
+                            <h2 id="schedule-info-title" className="text-lg font-bold text-slate-900 dark:text-white tracking-tight uppercase transition-colors duration-300">{t('scheduleInfo.title') || 'Schedule Info'}</h2>
                             <p className="text-[10px] font-bold text-slate-600 dark:text-slate-400 uppercase tracking-widest transition-colors duration-300">{t('scheduleInfo.subtitle') || 'Operational Status'}</p>
                         </div>
                     </div>
                     <button 
                         onClick={onClose}
-                        className="p-2 text-slate-600 dark:text-slate-400 hover:text-white hover:bg-slate-800 rounded-xl transition-all duration-300"
+                        className="p-2 text-slate-600 dark:text-slate-400 hover:text-white hover:bg-slate-800 rounded-xl transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500"
+                        aria-label={t('actions.close') || 'Close'}
+                        title={t('actions.close') || 'Close'}
+                        autoFocus
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -102,7 +124,7 @@ const ScheduleInfoModal: React.FC<ScheduleInfoModalProps> = ({ isOpen, onClose }
                 <div className="bg-slate-50 dark:bg-slate-950 px-8 py-6 border-t border-slate-200 dark:border-slate-800 flex justify-end transition-colors">
                     <button 
                         onClick={onClose}
-                        className="px-6 py-2.5 bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold uppercase tracking-widest rounded-xl transition-all"
+                        className="px-6 py-2.5 bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold uppercase tracking-widest rounded-xl transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
                     >
                         {t('actions.close') || 'Close'}
                     </button>
