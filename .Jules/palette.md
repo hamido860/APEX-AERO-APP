@@ -1,3 +1,7 @@
 ## 2024-07-09 - Added Keyboard Navigation to FilterDropdown
 **Learning:** `pnpm format` formats the entire repository, leading to massive unintended diffs that make code reviews difficult and cause merge conflicts. When aiming to make micro-UX improvements under 50 lines, avoid running full repository formatters. Also, `aria-expanded`, `aria-controls`, and `aria-label` are critical for custom dropdown menus, along with an `Escape` key listener to close the dropdown and return focus to the trigger button for better accessibility.
 **Action:** Do not run repository-wide formatting commands blindly when making isolated changes. Always ensure only the intended files/lines are modified and committed.
+
+## 2024-05-23 - Sortable Table Headers Accessibility
+**Learning:** Attaching `onClick` directly to a `<th>` element creates a significant accessibility barrier. Screen readers may only announce it as a "heading" without indicating it is interactive, and keyboard users cannot navigate to it via the Tab key or activate it using Space/Enter. Furthermore, the sorting state must be programmatically communicated.
+**Action:** When implementing sortable columns, always apply the `aria-sort` attribute (with values like 'ascending', 'descending', or 'none') directly to the `<th>` element, and wrap the clickable label and icon inside a native `<button>` element with appropriate focus-visible styles.
