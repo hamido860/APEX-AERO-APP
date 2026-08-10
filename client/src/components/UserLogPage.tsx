@@ -27,7 +27,12 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ onClose, onSave, currentS
 
     return (
          <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4 backdrop-blur-sm" onClick={onClose}>
-            <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl p-6 w-full max-w-md border border-slate-200 dark:border-slate-700 transform transition-all scale-100 transition-colors duration-300" onClick={e => e.stopPropagation()}>
+            <div
+                className="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl p-6 w-full max-w-md border border-slate-200 dark:border-slate-700 transform transition-all scale-100 transition-colors duration-300"
+                onClick={e => e.stopPropagation()}
+                role="dialog"
+                aria-modal="true"
+            >
                 <div className="flex flex-col gap-4">
                     <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100 transition-colors duration-300">{t('settingsModal.title')}</h2>
                     <p className="text-sm text-slate-600 dark:text-slate-400 transition-colors duration-300">{t('settingsModal.description')}</p>

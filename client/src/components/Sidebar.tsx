@@ -31,7 +31,6 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, children }) => {
         className={`fixed inset-0 bg-black/60 z-40 transition-opacity duration-300 ${
           isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
         }`}
-        aria-hidden="true"
       />
 
       {/* Sidebar */}

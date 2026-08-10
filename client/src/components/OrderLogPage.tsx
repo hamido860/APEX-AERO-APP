@@ -101,7 +101,12 @@ const UnrecognizedTaskModal: React.FC<{
 
     return (
         <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 backdrop-blur-sm" onClick={onClose}>
-            <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl p-6 flex flex-col w-full max-w-5xl max-h-[90vh] border border-slate-200 dark:border-slate-700 transition-colors duration-300" onClick={e => e.stopPropagation()}>
+            <div
+                className="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl p-6 flex flex-col w-full max-w-5xl max-h-[90vh] border border-slate-200 dark:border-slate-700 transition-colors duration-300"
+                onClick={e => e.stopPropagation()}
+                role="dialog"
+                aria-modal="true"
+            >
                 <header className="flex-shrink-0 mb-4">
                     <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 transition-colors duration-300">{t('orderlog.unrecognized.title')}</h2>
                     <p className="text-sm text-slate-600 dark:text-slate-400 mt-1 transition-colors duration-300">{t('orderlog.unrecognized.description')}</p>
@@ -846,7 +851,12 @@ const OrderLogPage: React.FC<OrderLogPageProps> = ({ allTasks, masterTasks, onUp
 
       {isUploadModalOpen && (
         <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 backdrop-blur-sm" onClick={closeModal}>
-            <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl p-6 flex flex-col w-full max-w-4xl max-h-[90vh] border border-slate-200 dark:border-slate-700 transition-colors duration-300" onClick={e => e.stopPropagation()}>
+            <div
+                className="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl p-6 flex flex-col w-full max-w-4xl max-h-[90vh] border border-slate-200 dark:border-slate-700 transition-colors duration-300"
+                onClick={e => e.stopPropagation()}
+                role="dialog"
+                aria-modal="true"
+            >
                 <header className="flex-shrink-0 mb-4">
                     <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 transition-colors duration-300">{t('orderlog.upload.title')}</h2>
                 </header>
