@@ -252,7 +252,12 @@ const TaskDatabasePage: React.FC<TaskDatabasePageProps> = ({ allTasks, masterTas
 
           {isUploadModalOpen && (
             <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 backdrop-blur-sm" onClick={closeUploadModal}>
-                <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl p-6 flex flex-col w-full max-w-4xl max-h-[90vh] border border-slate-200 dark:border-slate-700 transition-colors duration-300" onClick={e => e.stopPropagation()}>
+                <div
+                    className="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl p-6 flex flex-col w-full max-w-4xl max-h-[90vh] border border-slate-200 dark:border-slate-700 transition-colors duration-300"
+                    onClick={e => e.stopPropagation()}
+                    role="dialog"
+                    aria-modal="true"
+                >
                     <header className="flex-shrink-0 mb-4">
                         <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 transition-colors duration-300">{t('taskdatabase.upload.title')}</h2>
                     </header>

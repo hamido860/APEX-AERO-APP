@@ -29,6 +29,8 @@ const ScheduleInfoModal: React.FC<ScheduleInfoModalProps> = ({ isOpen, onClose }
             <div 
                 className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-2xl w-full max-w-lg overflow-hidden animate-in zoom-in-95 duration-300 transition-colors"
                 onClick={(e) => e.stopPropagation()}
+                role="dialog"
+                aria-modal="true"
             >
                 {/* Header */}
                 <div className="bg-slate-50 dark:bg-slate-950 px-8 py-6 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between transition-colors">
