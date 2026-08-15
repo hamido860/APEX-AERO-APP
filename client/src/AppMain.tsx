@@ -524,7 +524,7 @@ export const App = () => {
             <div key={item.id} className="relative group flex-1 flex justify-center">
               <button
                 onClick={() => { setCurrentView(item.id); setSelectedTask(null); setSelectedOperator(null); setIsSidebarOpen(false); }}
-                className={`flex items-center justify-center w-9 h-9 rounded-lg transition-all duration-200 relative ${
+                className={`flex items-center justify-center w-9 h-9 rounded-lg transition-all duration-200 relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 dark:focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-900 ${
                   currentView === item.id 
                     ? 'text-cyan-600 dark:text-cyan-400 bg-cyan-50 dark:bg-cyan-950/50' 
                     : 'text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800'
