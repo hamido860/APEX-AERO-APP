@@ -129,6 +129,8 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
     const { theme, toggleTheme } = useTheme();
     const columnMenuRef = useRef<HTMLDivElement>(null);
     const langMenuRef = useRef<HTMLDivElement>(null);
+    const langButtonRef = useRef<HTMLButtonElement>(null);
+    const columnButtonRef = useRef<HTMLButtonElement>(null);
     const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
     const [currentDate, setCurrentDate] = useState('');
     const [weekNumber, setWeekNumber] = useState(0);
@@ -323,6 +325,9 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
                  {canToggleColumns && columnVisibility && columnConfig && (
                    <div className="relative" ref={columnMenuRef}>
                        <button
+                           ref={columnButtonRef}
+                           aria-expanded={isColumnMenuOpen}
+                           aria-controls={isColumnMenuOpen ? "column-menu" : undefined}
                            onClick={() => onSetIsColumnMenuOpen(!isColumnMenuOpen)}
                            className="p-2 rounded-lg text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-700/60 hover:bg-slate-200 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white transition-colors focus:outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 dark:focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-800"
                            aria-label={t('header.toggleColumns')}
@@ -331,7 +336,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
                            <ColumnsIcon />
                        </button>
                        {isColumnMenuOpen && (
-                           <div className="absolute top-full left-0 mt-2 w-56 bg-slate-900/80 backdrop-blur-sm border border-slate-700 rounded-lg shadow-2xl p-2 z-50">
+                           <div id="column-menu" className="absolute top-full left-0 mt-2 w-56 bg-slate-900/80 backdrop-blur-sm border border-slate-700 rounded-lg shadow-2xl p-2 z-50">
                                <p className="text-sm font-semibold text-slate-300 px-2 py-1 mb-1">{t('header.toggleColumns')}</p>
                                {columnConfig.map(col => (
                                    <label key={col.id} className="flex items-center gap-3 p-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700/50 cursor-pointer">
@@ -358,6 +363,9 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
                 </div>
                  <div className="relative group/lang" ref={langMenuRef}>
                     <button
+                        ref={langButtonRef}
+                        aria-expanded={isLangMenuOpen}
+                        aria-controls={isLangMenuOpen ? "lang-menu" : undefined}
                         onClick={() => setIsLangMenuOpen(!isLangMenuOpen)}
                         className="flex items-center justify-center w-8 h-8 rounded-lg text-slate-400 dark:text-slate-400 hover:text-slate-700 dark:hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 dark:focus-visible:ring-cyan-400"
                         aria-label={t('language')} title={t('language')}
@@ -369,7 +377,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
                         <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-slate-900 dark:bg-slate-700 rotate-45"></div>
                     </div>
                     {isLangMenuOpen && (
-                         <div className="absolute top-full right-0 mt-2 w-36 bg-white dark:bg-slate-900/90 backdrop-blur-sm border border-slate-200 dark:border-slate-700 rounded-lg shadow-2xl p-2 z-50">
+                         <div id="lang-menu" className="absolute top-full right-0 mt-2 w-36 bg-white dark:bg-slate-900/90 backdrop-blur-sm border border-slate-200 dark:border-slate-700 rounded-lg shadow-2xl p-2 z-50">
                              <button onClick={() => { setLanguage('en'); setIsLangMenuOpen(false); }} className={`w-full text-left p-2 rounded-md text-sm transition-colors ${language === 'en' ? 'bg-cyan-500 text-white' : 'text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700/50'}`}>{t('english')}</button>
                              <button onClick={() => { setLanguage('fr'); setIsLangMenuOpen(false); }} className={`w-full text-left p-2 rounded-md text-sm transition-colors ${language === 'fr' ? 'bg-cyan-500 text-white' : 'text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700/50'}`}>{t('french')}</button>
                          </div>
