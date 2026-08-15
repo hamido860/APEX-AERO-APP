@@ -95,7 +95,8 @@ const OperatorTimeline: React.FC<{
                     <p className="text-sm text-slate-600 dark:text-slate-400 transition-colors duration-300">{t('admin.workload', workload.toFixed(1))}</p>
                     <button 
                         onClick={(e) => { e.stopPropagation(); onAutoSchedule(); }}
-                        className="text-cyan-400 hover:text-cyan-300 hover:bg-cyan-900/30 p-1.5 rounded-md transition-colors"
+                        className="text-cyan-400 hover:text-cyan-300 hover:bg-cyan-900/30 p-1.5 rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500"
+                        aria-label="Auto-Schedule / Compact Tasks"
                         title="Auto-Schedule / Compact Tasks (No Overlap)"
                     >
                         <SparklesIcon />
@@ -164,10 +165,10 @@ const CommitBar: React.FC<{ onCommit: () => void; onDiscard: () => void; changeC
                 {t('admin.stagedChanges', changeCount)}
             </p>
             <div className="flex items-center gap-4">
-                <button onClick={onDiscard} className="flex items-center gap-2 px-4 py-2 text-sm font-bold rounded-lg bg-slate-600 hover:bg-slate-500 text-white transition-colors">
+                <button onClick={onDiscard} className="flex items-center gap-2 px-4 py-2 text-sm font-bold rounded-lg bg-slate-600 hover:bg-slate-500 text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900">
                     <XIcon/> {t('actions.discard')}
                 </button>
-                <button onClick={onCommit} className="flex items-center gap-2 px-4 py-2 text-sm font-bold rounded-lg bg-green-600 hover:bg-green-500 text-white transition-colors">
+                <button onClick={onCommit} className="flex items-center gap-2 px-4 py-2 text-sm font-bold rounded-lg bg-green-600 hover:bg-green-500 text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900">
                     <CheckIcon/> {t('actions.saveChanges')}
                 </button>
             </div>
@@ -193,8 +194,8 @@ const FilterDropdown: React.FC<{ label: string; options: string[]; selected: str
         <div className="relative" ref={dropdownRef}>
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className={`flex items-center gap-2 px-3 py-1.5 text-sm font-semibold rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900 ${
-                    isActive ? 'bg-cyan-600 dark:bg-cyan-500 text-white hover:bg-cyan-700 dark:hover:bg-cyan-600 focus:ring-cyan-500 dark:focus:ring-cyan-400' : 'bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-600 focus:ring-slate-400 dark:focus:ring-slate-500'
+                className={`flex items-center gap-2 px-3 py-1.5 text-sm font-semibold rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 ${
+                    isActive ? 'bg-cyan-600 dark:bg-cyan-500 text-white hover:bg-cyan-700 dark:hover:bg-cyan-600 focus-visible:ring-cyan-500 dark:focus-visible:ring-cyan-400' : 'bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-600 focus-visible:ring-slate-400 dark:focus-visible:ring-slate-500'
                 }`}
             >
                 {label}
@@ -242,7 +243,7 @@ const PlannerFilters: React.FC<{
                 <span className="text-sm font-semibold text-slate-200">{t('admin.filters.criticalOnly')}</span>
             </label>
              {hasActiveFilters && (
-                <button onClick={onClearFilters} className="text-sm font-semibold text-red-400 hover:text-red-300 transition-colors">{t('admin.filters.clear')}</button>
+                <button onClick={onClearFilters} className="text-sm font-semibold text-red-400 hover:text-red-300 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-400 rounded px-1">{t('admin.filters.clear')}</button>
             )}
         </div>
     );
