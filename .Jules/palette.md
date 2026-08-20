@@ -4,3 +4,6 @@
 ## 2024-07-24 - Accessibility standards for custom modal dialogs
 **Learning:** Custom React modals without `role="dialog"` and `aria-modal="true"` are not properly announced as modal dialogs by screen readers. Furthermore, applying `aria-hidden="true"` to a modal backdrop can inadvertently hide the entire application or the modal content itself if placed incorrectly, causing severe accessibility regressions.
 **Action:** Always ensure custom modals have `role="dialog"` and `aria-modal="true"` on the inner content wrapper. Do not use `aria-hidden="true"` on modal backdrops unless explicitly managing focus and visibility via mature libraries (like Radix UI), as standard DOM insertion handles hidden elements without needing it.
+## 2023-10-24 - Sortable Table Header Accessibility
+**Learning:** Attaching `onClick` handlers directly to `<th>` elements for sorting breaks accessibility as screen readers do not recognize them as interactive controls, and keyboard users cannot focus or activate them.
+**Action:** Always wrap the sortable contents of a `<th>` in a native `<button>` element. Ensure the `<th>` explicitly communicates the current sort state using the `aria-sort` attribute (`ascending`, `descending`, or `none`), and provide clear `focus-visible` styles on the button for keyboard navigation.
