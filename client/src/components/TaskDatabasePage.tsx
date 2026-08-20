@@ -33,13 +33,17 @@ const SortableHeader: React.FC<{
 }> = ({ label, sortKey, sortConfig, requestSort, className }) => {
     const isSorted = sortConfig?.key === sortKey;
     const directionIcon = isSorted ? (sortConfig.direction === 'ascending' ? '▲' : '▼') : '';
+    const ariaSort = isSorted ? sortConfig.direction : 'none';
 
     return (
-        <th className={`py-1.5 px-3 text-left text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider cursor-pointer hover:bg-slate-200/50 dark:hover:bg-slate-700/50 transition-colors ${className}`} onClick={() => requestSort(sortKey)}>
-            <div className="flex items-center gap-2">
+        <th aria-sort={ariaSort} className={`p-0 text-left text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider ${className || ''}`}>
+            <button
+                onClick={() => requestSort(sortKey)}
+                className="w-full flex items-center gap-2 py-1.5 px-3 cursor-pointer hover:bg-slate-200/50 dark:hover:bg-slate-700/50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-inset rounded"
+            >
                 {label}
-                <span className="text-cyan-400">{directionIcon}</span>
-            </div>
+                <span className="text-cyan-400" aria-hidden="true">{directionIcon}</span>
+            </button>
         </th>
     );
 };
