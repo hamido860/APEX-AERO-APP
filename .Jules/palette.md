@@ -4,3 +4,7 @@
 ## 2024-07-24 - Accessibility standards for custom modal dialogs
 **Learning:** Custom React modals without `role="dialog"` and `aria-modal="true"` are not properly announced as modal dialogs by screen readers. Furthermore, applying `aria-hidden="true"` to a modal backdrop can inadvertently hide the entire application or the modal content itself if placed incorrectly, causing severe accessibility regressions.
 **Action:** Always ensure custom modals have `role="dialog"` and `aria-modal="true"` on the inner content wrapper. Do not use `aria-hidden="true"` on modal backdrops unless explicitly managing focus and visibility via mature libraries (like Radix UI), as standard DOM insertion handles hidden elements without needing it.
+
+## 2024-05-18 - Modal Accessibility Enhancements
+**Learning:** Adding standard `aria-labelledby` linking to a modal title ID ensures the modal content is correctly announced by screen readers when opened. In addition, an `Escape` key listener is critical for custom modal implementations (without a library like Dialog) to allow keyboard navigation to exit gracefully, alongside focusing the primary dismiss action via a `useRef` automatically on mount.
+**Action:** When creating custom modals, strictly implement an `Escape` key listener on mount, apply `aria-labelledby` to map to the title element, and use `useRef` to pass focus to a primary interactive element (like "Close").
